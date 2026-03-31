@@ -1,9 +1,15 @@
-"""Claude API 호출 래퍼 — 인사이트 엔진 통합.
+"""Claude API 호출 래퍼 — 코치별 프롬프트 라우팅 + 인사이트 엔진 통합.
 
 3가지 모드:
   1. 세션 인사이트: 세션 직후 로컬 분석 (API 불필요)
   2. 주간 인사이트: 로컬 분석 + AI 보강 (API 선택)
   3. 기간 인사이트: 로컬 분석 + AI 심층 분석 (API 선택)
+
+코치별 프롬프트:
+  - Exercise Coach: 세션/운동 분석 시
+  - Nutrition Coach: 영양 분석 시
+  - Recovery Coach: 회복/수면 분석 시
+  - Orchestrator: 통합 인사이트 (주간 리포트, 기간 분석)
 """
 
 from __future__ import annotations
@@ -13,6 +19,12 @@ import os
 from typing import Optional
 
 from core.analyzer import AnalysisResult
+from core.coaches.prompts import (
+    EXERCISE_COACH_PROMPT,
+    NUTRITION_COACH_PROMPT,
+    ORCHESTRATOR_PROMPT,
+    RECOVERY_COACH_PROMPT,
+)
 from core.insight_engine import (
     PeriodInsight,
     SessionInsight,
@@ -22,30 +34,19 @@ from core.insight_engine import (
     render_weekly_insight,
 )
 
-SYSTEM_PROMPT = """\
-당신은 개인 피트니스 코치 AI입니다. 사용자의 운동 데이터 분석 결과를 바탕으로
-실용적이고 구체적인 인사이트를 한국어로 제공합니다.
+# Legacy prompt (kept for backward compat, orchestrator prompt used for new flows)
+SYSTEM_PROMPT = ORCHESTRATOR_PROMPT
 
-핵심 원칙:
-- 데이터에 기반한 객관적 분석만 제공
-- 구체적 숫자와 비교를 통한 설득력 있는 피드백
-- 실행 가능한 "다음 스텝" 형태의 조언
-- 칭찬과 경고의 균형
 
-분석 우선순위:
-1. 신기록(PR) 달성 → 적극 칭찬 + 다음 목표 제시
-2. 과부하/부상 위험 → 즉시 경고 + 대안 제시
-3. 정체기 감지 → 원인 분석 + 구체적 해결책
-4. 체성분 변화 + 운동 볼륨 상관관계 → 영양/프로그램 조언
-5. 근육군 균형 → 불균형 시 보완 운동 구체적 추천
-6. 회복 패턴 → 휴식 부족/과다 시 스케줄 조언
-
-출력 형식:
-- 간결하고 임팩트 있는 한국어
-- 핵심 포인트를 먼저, 세부 분석은 뒤에
-- 숫자는 의미 있는 것만 (소수점 1자리까지)
-- 이모지 적절히 사용 (과하지 않게)
-"""
+def _get_coach_prompt(domain: str = "orchestrator") -> str:
+    """코치별 시스템 프롬프트 반환."""
+    prompts = {
+        "exercise": EXERCISE_COACH_PROMPT,
+        "nutrition": NUTRITION_COACH_PROMPT,
+        "recovery": RECOVERY_COACH_PROMPT,
+        "orchestrator": ORCHESTRATOR_PROMPT,
+    }
+    return prompts.get(domain, ORCHESTRATOR_PROMPT)
 
 PERIOD_PROMPT_TEMPLATE = """\
 운동 데이터 분석 결과:
@@ -244,7 +245,7 @@ def generate_session_narrative(
         resp = client.messages.create(
             model=model,
             max_tokens=200,
-            system="당신은 간결한 피트니스 코치입니다. 1-2문장으로 핵심만 말합니다.",
+            system=_get_coach_prompt("exercise"),
             messages=[{"role": "user", "content": msg}],
         )
         return resp.content[0].text
@@ -275,7 +276,42 @@ def generate_weekly_narrative(
         resp = client.messages.create(
             model=model,
             max_tokens=400,
-            system=SYSTEM_PROMPT,
+            system=_get_coach_prompt("orchestrator"),
+            messages=[{"role": "user", "content": msg}],
+        )
+        return resp.content[0].text
+    except Exception:
+        return None
+
+
+def generate_coach_response(
+    domain: str,
+    context: str,
+    question: str = "",
+    model: str = "claude-sonnet-4-20250514",
+) -> Optional[str]:
+    """특정 코치 도메인으로 AI 응답 생성.
+
+    Args:
+        domain: "exercise", "nutrition", "recovery", "orchestrator"
+        context: 분석 데이터 컨텍스트
+        question: 사용자 질문 또는 분석 요청
+    """
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return None
+
+    try:
+        import anthropic
+
+        client = anthropic.Anthropic(api_key=api_key)
+        prompt = _get_coach_prompt(domain)
+        msg = f"{context}\n\n{question}" if question else context
+
+        resp = client.messages.create(
+            model=model,
+            max_tokens=800,
+            system=prompt,
             messages=[{"role": "user", "content": msg}],
         )
         return resp.content[0].text
