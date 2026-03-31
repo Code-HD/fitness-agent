@@ -10,10 +10,14 @@ from typing import Optional
 from adapters.base import StorageAdapter
 from core.models import (
     BodyMetrics,
+    CoachingPhase,
     Exercise,
     ExerciseSet,
+    Meal,
+    NutritionTarget,
     Session,
     SessionType,
+    SleepLog,
     WeeklyPlan,
 )
 
@@ -74,6 +78,60 @@ CREATE INDEX IF NOT EXISTS idx_sessions_plan ON sessions(plan_id);
 CREATE INDEX IF NOT EXISTS idx_exercises_session ON exercises(session_id);
 CREATE INDEX IF NOT EXISTS idx_sets_exercise ON exercise_sets(exercise_id);
 CREATE INDEX IF NOT EXISTS idx_body_metrics_date ON body_metrics(date);
+
+CREATE TABLE IF NOT EXISTS meals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT NOT NULL,
+    meal_type TEXT NOT NULL,
+    description TEXT NOT NULL,
+    calories REAL,
+    protein_g REAL,
+    carbs_g REAL,
+    fat_g REAL,
+    fiber_g REAL,
+    water_ml REAL,
+    is_natural INTEGER DEFAULT 1,
+    photo_url TEXT,
+    note TEXT DEFAULT '',
+    created_at TEXT DEFAULT (datetime('now', 'localtime'))
+);
+
+CREATE TABLE IF NOT EXISTS nutrition_targets (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    phase TEXT NOT NULL,
+    calories_target REAL NOT NULL,
+    protein_g_per_kg REAL NOT NULL,
+    carbs_g_per_kg REAL NOT NULL,
+    fat_g_per_kg REAL NOT NULL,
+    water_ml_target REAL NOT NULL,
+    start_date TEXT NOT NULL,
+    end_date TEXT,
+    created_at TEXT DEFAULT (datetime('now', 'localtime'))
+);
+
+CREATE TABLE IF NOT EXISTS sleep_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT NOT NULL UNIQUE,
+    sleep_start TEXT,
+    sleep_end TEXT,
+    duration_hours REAL NOT NULL,
+    quality INTEGER,
+    note TEXT DEFAULT '',
+    created_at TEXT DEFAULT (datetime('now', 'localtime'))
+);
+
+CREATE TABLE IF NOT EXISTS coaching_state (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    state TEXT NOT NULL,
+    started_at TEXT NOT NULL,
+    ended_at TEXT,
+    reason TEXT DEFAULT '',
+    parameters TEXT DEFAULT '{}',
+    created_at TEXT DEFAULT (datetime('now', 'localtime'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_meals_date ON meals(date);
+CREATE INDEX IF NOT EXISTS idx_sleep_date ON sleep_logs(date);
 """
 
 
@@ -320,3 +378,172 @@ class SQLiteAdapter(StorageAdapter):
             "SELECT DISTINCT name FROM exercises ORDER BY name"
         ).fetchall()
         return [r["name"] for r in rows]
+
+    # --- Nutrition ---
+
+    def save_meal(self, meal: Meal) -> int:
+        cur = self.conn.execute(
+            "INSERT INTO meals (date, meal_type, description, calories, protein_g, carbs_g, "
+            "fat_g, fiber_g, water_ml, is_natural, photo_url, note) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (meal.date, meal.meal_type, meal.description, meal.calories,
+             meal.protein_g, meal.carbs_g, meal.fat_g, meal.fiber_g,
+             meal.water_ml, 1 if meal.is_natural else 0, meal.photo_url, meal.note),
+        )
+        self.conn.commit()
+        return cur.lastrowid
+
+    def get_meals(
+        self,
+        start_date: Optional[date] = None,
+        end_date: Optional[date] = None,
+        limit: int = 100,
+    ) -> list[Meal]:
+        query = "SELECT * FROM meals WHERE 1=1"
+        params: list = []
+        if start_date:
+            query += " AND date >= ?"
+            params.append(start_date.isoformat())
+        if end_date:
+            query += " AND date <= ?"
+            params.append(end_date.isoformat())
+        query += " ORDER BY date DESC, id DESC LIMIT ?"
+        params.append(limit)
+        rows = self.conn.execute(query, params).fetchall()
+        return [Meal(
+            id=r["id"], date=r["date"], meal_type=r["meal_type"],
+            description=r["description"], calories=r["calories"],
+            protein_g=r["protein_g"], carbs_g=r["carbs_g"], fat_g=r["fat_g"],
+            fiber_g=r["fiber_g"], water_ml=r["water_ml"],
+            is_natural=bool(r["is_natural"]), photo_url=r["photo_url"],
+            note=r["note"] or "", created_at=r["created_at"],
+        ) for r in rows]
+
+    def save_nutrition_target(self, target: NutritionTarget) -> int:
+        # Close any existing open target
+        self.conn.execute(
+            "UPDATE nutrition_targets SET end_date = ? WHERE end_date IS NULL",
+            (target.start_date,),
+        )
+        cur = self.conn.execute(
+            "INSERT INTO nutrition_targets (phase, calories_target, protein_g_per_kg, "
+            "carbs_g_per_kg, fat_g_per_kg, water_ml_target, start_date, end_date) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            (target.phase, target.calories_target, target.protein_g_per_kg,
+             target.carbs_g_per_kg, target.fat_g_per_kg, target.water_ml_target,
+             target.start_date, target.end_date),
+        )
+        self.conn.commit()
+        return cur.lastrowid
+
+    def get_nutrition_target(
+        self, target_date: Optional[date] = None,
+    ) -> Optional[NutritionTarget]:
+        if target_date:
+            d = target_date.isoformat()
+            row = self.conn.execute(
+                "SELECT * FROM nutrition_targets WHERE start_date <= ? "
+                "AND (end_date IS NULL OR end_date > ?) ORDER BY start_date DESC LIMIT 1",
+                (d, d),
+            ).fetchone()
+        else:
+            row = self.conn.execute(
+                "SELECT * FROM nutrition_targets WHERE end_date IS NULL "
+                "ORDER BY start_date DESC LIMIT 1",
+            ).fetchone()
+        if not row:
+            return None
+        return NutritionTarget(
+            id=row["id"], phase=row["phase"],
+            calories_target=row["calories_target"],
+            protein_g_per_kg=row["protein_g_per_kg"],
+            carbs_g_per_kg=row["carbs_g_per_kg"],
+            fat_g_per_kg=row["fat_g_per_kg"],
+            water_ml_target=row["water_ml_target"],
+            start_date=row["start_date"], end_date=row["end_date"],
+            created_at=row["created_at"],
+        )
+
+    # --- Recovery ---
+
+    def save_sleep_log(self, log: SleepLog) -> int:
+        cur = self.conn.execute(
+            "INSERT OR REPLACE INTO sleep_logs (date, sleep_start, sleep_end, "
+            "duration_hours, quality, note) VALUES (?, ?, ?, ?, ?, ?)",
+            (log.date, log.sleep_start, log.sleep_end,
+             log.duration_hours, log.quality, log.note),
+        )
+        self.conn.commit()
+        return cur.lastrowid
+
+    def get_sleep_logs(
+        self,
+        start_date: Optional[date] = None,
+        end_date: Optional[date] = None,
+        limit: int = 100,
+    ) -> list[SleepLog]:
+        query = "SELECT * FROM sleep_logs WHERE 1=1"
+        params: list = []
+        if start_date:
+            query += " AND date >= ?"
+            params.append(start_date.isoformat())
+        if end_date:
+            query += " AND date <= ?"
+            params.append(end_date.isoformat())
+        query += " ORDER BY date DESC LIMIT ?"
+        params.append(limit)
+        rows = self.conn.execute(query, params).fetchall()
+        return [SleepLog(
+            id=r["id"], date=r["date"],
+            sleep_start=r["sleep_start"], sleep_end=r["sleep_end"],
+            duration_hours=r["duration_hours"], quality=r["quality"],
+            note=r["note"] or "", created_at=r["created_at"],
+        ) for r in rows]
+
+    # --- Coaching State ---
+
+    def save_coaching_phase(self, phase: CoachingPhase) -> int:
+        import json
+        # Close current phase
+        self.conn.execute(
+            "UPDATE coaching_state SET ended_at = ? WHERE ended_at IS NULL",
+            (phase.started_at,),
+        )
+        cur = self.conn.execute(
+            "INSERT INTO coaching_state (state, started_at, ended_at, reason, parameters) "
+            "VALUES (?, ?, ?, ?, ?)",
+            (phase.state, phase.started_at, phase.ended_at,
+             phase.reason, json.dumps(phase.parameters)),
+        )
+        self.conn.commit()
+        return cur.lastrowid
+
+    def get_current_phase(self) -> Optional[CoachingPhase]:
+        import json
+        row = self.conn.execute(
+            "SELECT * FROM coaching_state WHERE ended_at IS NULL "
+            "ORDER BY started_at DESC LIMIT 1",
+        ).fetchone()
+        if not row:
+            return None
+        return CoachingPhase(
+            id=row["id"], state=row["state"],
+            started_at=row["started_at"], ended_at=row["ended_at"],
+            reason=row["reason"] or "",
+            parameters=json.loads(row["parameters"]) if row["parameters"] else {},
+            created_at=row["created_at"],
+        )
+
+    def get_phase_history(self, limit: int = 10) -> list[CoachingPhase]:
+        import json
+        rows = self.conn.execute(
+            "SELECT * FROM coaching_state ORDER BY started_at DESC LIMIT ?",
+            (limit,),
+        ).fetchall()
+        return [CoachingPhase(
+            id=r["id"], state=r["state"],
+            started_at=r["started_at"], ended_at=r["ended_at"],
+            reason=r["reason"] or "",
+            parameters=json.loads(r["parameters"]) if r["parameters"] else {},
+            created_at=r["created_at"],
+        ) for r in rows]

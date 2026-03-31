@@ -134,6 +134,101 @@ class BodyMetrics:
     created_at: Optional[datetime] = None
 
 
+# --- 영양 모델 ---
+
+
+@dataclass
+class Meal:
+    """식사 기록."""
+    date: str                              # YYYY-MM-DD
+    meal_type: str                         # 아침/점심/저녁/간식/운동전/운동후
+    description: str                       # 자연어 설명
+    calories: Optional[float] = None       # kcal
+    protein_g: Optional[float] = None
+    carbs_g: Optional[float] = None
+    fat_g: Optional[float] = None
+    fiber_g: Optional[float] = None
+    water_ml: Optional[float] = None
+    is_natural: bool = True
+    photo_url: Optional[str] = None
+    note: str = ""
+    id: Optional[int] = None
+    created_at: Optional[str] = None
+
+
+@dataclass
+class DailyNutrition:
+    """일일 영양 요약 (자동 집계)."""
+    date: str
+    total_calories: float = 0.0
+    total_protein_g: float = 0.0
+    total_carbs_g: float = 0.0
+    total_fat_g: float = 0.0
+    total_fiber_g: float = 0.0
+    total_water_ml: float = 0.0
+    meal_count: int = 0
+    natural_ratio: float = 1.0             # 0-1
+    training_day: bool = False
+
+
+@dataclass
+class NutritionTarget:
+    """영양 목표 (주기별 설정)."""
+    phase: str                             # bulk/cut/maintain/recomp
+    calories_target: float
+    protein_g_per_kg: float
+    carbs_g_per_kg: float
+    fat_g_per_kg: float
+    water_ml_target: float
+    start_date: str
+    end_date: Optional[str] = None
+    id: Optional[int] = None
+    created_at: Optional[str] = None
+
+
+# --- 회복 모델 ---
+
+
+@dataclass
+class SleepLog:
+    """수면 기록."""
+    date: str                              # YYYY-MM-DD
+    duration_hours: float
+    sleep_start: Optional[str] = None      # HH:MM
+    sleep_end: Optional[str] = None        # HH:MM
+    quality: Optional[int] = None          # 1-5 주관적
+    note: str = ""
+    id: Optional[int] = None
+    created_at: Optional[str] = None
+
+
+@dataclass
+class RecoveryScore:
+    """회복 점수 (계산 결과)."""
+    date: str
+    score: int = 50                        # 0-100
+    fatigue_level: str = "moderate"         # low/moderate/high/critical
+    sleep_quality: str = "unknown"
+    consecutive_training_days: int = 0
+    deload_recommended: bool = False
+    details: dict = field(default_factory=dict)
+
+
+# --- 오케스트레이터 모델 ---
+
+
+@dataclass
+class CoachingPhase:
+    """코칭 페이즈 상태."""
+    state: str                             # RECOMP/BUILD/CUT/DELOAD/MAINTAIN
+    started_at: str
+    reason: str = ""
+    ended_at: Optional[str] = None
+    parameters: dict = field(default_factory=dict)
+    id: Optional[int] = None
+    created_at: Optional[str] = None
+
+
 # --- 파싱 유틸리티 ---
 
 def parse_sets(sets_str: str, rpe: Optional[float] = None) -> list[ExerciseSet]:
