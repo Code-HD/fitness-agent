@@ -1,0 +1,4646 @@
+{
+  "sessions": [
+    {
+      "id": "sqlite_8",
+      "date": "2026-03-12",
+      "week": null,
+      "session_number": 3,
+      "session_type": "workout",
+      "label": "오운동-3",
+      "day_label": "목요일",
+      "exercises": [
+        {
+          "name": "벤치프레스",
+          "sets": [
+            {
+              "weight_kg": 50.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 60.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 75.0,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 80.0,
+              "reps": 3,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1595.0
+        },
+        {
+          "name": "랫풀다운(N)",
+          "sets": [
+            {
+              "weight_kg": 35.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 45.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 55.0,
+              "reps": 6,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1200.0
+        },
+        {
+          "name": "숄더프레스",
+          "sets": [
+            {
+              "weight_kg": 17.5,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 22.5,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 355.0
+        },
+        {
+          "name": "데드행",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 40.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 32.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 3150.0,
+      "note": null
+    },
+    {
+      "id": "sqlite_6",
+      "date": "2026-03-11",
+      "week": null,
+      "session_number": 2,
+      "session_type": "workout",
+      "label": "오운동-2",
+      "day_label": "수요일",
+      "exercises": [
+        {
+          "name": "스쿼트",
+          "sets": [
+            {
+              "weight_kg": 40.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 60.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 80.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 90.0,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 2170.0
+        },
+        {
+          "name": "레그프레스",
+          "sets": [
+            {
+              "weight_kg": 80.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 100.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 120.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 2920.0
+        },
+        {
+          "name": "레그컬",
+          "sets": [
+            {
+              "weight_kg": 25.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 30.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 880.0
+        }
+      ],
+      "total_volume": 5970.0,
+      "note": null
+    },
+    {
+      "id": "sqlite_52",
+      "date": "2026-03-10",
+      "week": null,
+      "session_number": 45,
+      "session_type": "workout",
+      "label": "오운동-45",
+      "day_label": "화요일",
+      "exercises": [
+        {
+          "name": "트레드밀",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "페이스풀&이두컬",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "후면풀",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "프레스(체어)",
+          "sets": [
+            {
+              "weight_kg": 15.0,
+              "reps": 32,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 27,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 24,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 480.0
+        },
+        {
+          "name": "레이즈(체어)",
+          "sets": [
+            {
+              "weight_kg": 4.0,
+              "reps": 22,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 22,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 24,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 88.0
+        },
+        {
+          "name": "OHP",
+          "sets": [
+            {
+              "weight_kg": 0.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "KB슈러그",
+          "sets": [
+            {
+              "weight_kg": 6.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 8.0,
+              "reps": 18,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 10.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 424.0
+        },
+        {
+          "name": "이두런지",
+          "sets": [
+            {
+              "weight_kg": 10.0,
+              "reps": 24,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 240.0
+        },
+        {
+          "name": "모으기(윗가슴, freemotion, 높이 8)",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 1232.0,
+      "note": "KB슈러그 10kg 신기록! 체어 프레스/레이즈 신규 종목. OHP 5kg에서 -2회 하락(피로 징후)."
+    },
+    {
+      "id": "sqlite_7",
+      "date": "2026-03-10",
+      "week": null,
+      "session_number": null,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "화요일",
+      "exercises": [
+        {
+          "name": "폼롤러",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "캣카우",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 15,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 15,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "브릿지",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "힙플렉서 스트레칭",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 60.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 60.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_5",
+      "date": "2026-03-09",
+      "week": null,
+      "session_number": 1,
+      "session_type": "workout",
+      "label": "오운동-1",
+      "day_label": "월요일",
+      "exercises": [
+        {
+          "name": "벤치프레스",
+          "sets": [
+            {
+              "weight_kg": 40.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 50.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 60.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 70.0,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1810.0
+        },
+        {
+          "name": "랫풀다운(N)",
+          "sets": [
+            {
+              "weight_kg": 30.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 40.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 50.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1160.0
+        },
+        {
+          "name": "데드행",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 35.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 28.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 22.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "숄더프레스",
+          "sets": [
+            {
+              "weight_kg": 15.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 380.0
+        }
+      ],
+      "total_volume": 3350.0,
+      "note": null
+    },
+    {
+      "id": "sqlite_51",
+      "date": "2026-03-06",
+      "week": null,
+      "session_number": 44,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "금요일",
+      "exercises": [],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_50",
+      "date": "2026-03-04",
+      "week": null,
+      "session_number": 43,
+      "session_type": "workout",
+      "label": "오운동-43",
+      "day_label": "수요일",
+      "exercises": [
+        {
+          "name": "숙제",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "오픈레그라커",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "트레드밀",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "매달리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 36.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 30.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 16.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "인클푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "OHP",
+          "sets": [
+            {
+              "weight_kg": 0.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 5.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 10.0,
+              "reps": 2,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 60.0
+        },
+        {
+          "name": "DB스쿼트&슈러그&레이즈",
+          "sets": [
+            {
+              "weight_kg": 6.0,
+              "reps": 32,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 8.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 8.0,
+              "reps": 21,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 520.0
+        },
+        {
+          "name": "로테이션풀",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "래터럴콕(높이 3)",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "프론트레이즈(freemotion, 높이 11)",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 580.0,
+      "note": "OHP 빈봉 16회 PR! 인클푸쉬업 10/10/10 일관성. 래터럴콕 신규 종목."
+    },
+    {
+      "id": "sqlite_49",
+      "date": "2026-03-03",
+      "week": null,
+      "session_number": 42,
+      "session_type": "workout",
+      "label": "오운동-42",
+      "day_label": "화요일",
+      "exercises": [
+        {
+          "name": "트레드밀",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "매달리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 33.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 17.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 20.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "몸통로테",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "원판쓰러스터",
+          "sets": [
+            {
+              "weight_kg": 20.0,
+              "reps": 18,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 13,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 14,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 900.0
+        },
+        {
+          "name": "풀업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 0,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 0,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "로우(N)",
+          "sets": [
+            {
+              "weight_kg": 30.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1320.0
+        },
+        {
+          "name": "로우(W)",
+          "sets": [
+            {
+              "weight_kg": 30.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1040.0
+        },
+        {
+          "name": "로우(얼터)",
+          "sets": [
+            {
+              "weight_kg": 15.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 15.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 15.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 660.0
+        }
+      ],
+      "total_volume": 3920.0,
+      "note": "원판쓰러스터 20kg×18 PR! 로우 3가지 그립(노멀/와이드/얼터) 체계적 훈련."
+    },
+    {
+      "id": "sqlite_4",
+      "date": "2026-03-01",
+      "week": null,
+      "session_number": 4,
+      "session_type": "workout",
+      "label": "오운동-4",
+      "day_label": "일요일",
+      "exercises": [
+        {
+          "name": "벤치프레스",
+          "sets": [
+            {
+              "weight_kg": 45.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 55.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 65.0,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1215.0
+        },
+        {
+          "name": "랫풀다운(N)",
+          "sets": [
+            {
+              "weight_kg": 35.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 45.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 780.0
+        },
+        {
+          "name": "데드행",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 45.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 30.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 1995.0,
+      "note": null
+    },
+    {
+      "id": "sqlite_48",
+      "date": "2026-02-28",
+      "week": null,
+      "session_number": 41,
+      "session_type": "workout",
+      "label": "오운동-41",
+      "day_label": "토요일",
+      "exercises": [
+        {
+          "name": "OHP",
+          "sets": [
+            {
+              "weight_kg": 0.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 5.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 10.0,
+              "reps": 6,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 12.5,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 162.5
+        },
+        {
+          "name": "DB프레스",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "비하인드프레스",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "슈러그",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "이두컬",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "벤치 Y레이즈",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "풀업",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 162.5,
+      "note": "OHP 12.5kg 신기록! 비하인드프레스 신규 종목."
+    },
+    {
+      "id": "sqlite_47",
+      "date": "2026-02-28",
+      "week": null,
+      "session_number": 40,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "토요일",
+      "exercises": [
+        {
+          "name": "SNPE 목베개",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "종아리/정강이/발목 마사지볼",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "목 뒤(아문혈/풍부혈) 마사지볼",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "박스 밟고 종아리 스트레칭",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "궁뎅이 스트레칭(비둡기 자세)",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "이너서클로 이너타이",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "할로우 바디",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "이너서클로 힌어덩션",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "잠못자고 컨디션 안좋아서 리커버리 데이로 전환. SNPE=홍정기 교수님 척추 자세교정 운동. 아문혈/풍부혈 자리 마사지."
+    },
+    {
+      "id": "sqlite_46",
+      "date": "2026-02-27",
+      "week": null,
+      "session_number": 39,
+      "session_type": "workout",
+      "label": "오운동-39",
+      "day_label": "금요일",
+      "exercises": [
+        {
+          "name": "런닝",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "박스인클푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 7,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "매달리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 36.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 24.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 22.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "OHP",
+          "sets": [
+            {
+              "weight_kg": 0.0,
+              "reps": 14,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 7.5,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 37.5
+        },
+        {
+          "name": "박스런지&이두&OH",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "와이드스쿼트 KB슈러그",
+          "sets": [
+            {
+              "weight_kg": 6.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 6.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 8.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 400.0
+        },
+        {
+          "name": "와이드스쿼트 KB레이즈",
+          "sets": [
+            {
+              "weight_kg": 6.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 6.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 8.0,
+              "reps": 9,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 264.0
+        },
+        {
+          "name": "리포머 Y레이즈(freemotion)",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 6,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 701.5,
+      "note": "런닝 11mph 신기록! OHP 5kg에서 +2회 성장. 와이드스쿼트 KB 8kg 증량."
+    },
+    {
+      "id": "sqlite_3",
+      "date": "2026-02-26",
+      "week": null,
+      "session_number": null,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "목요일",
+      "exercises": [
+        {
+          "name": "폼롤러",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "캣카우",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 15,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 15,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_2",
+      "date": "2026-02-25",
+      "week": null,
+      "session_number": 3,
+      "session_type": "workout",
+      "label": "오운동-3",
+      "day_label": "수요일",
+      "exercises": [
+        {
+          "name": "벤치프레스",
+          "sets": [
+            {
+              "weight_kg": 40.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 50.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 60.0,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1100.0
+        },
+        {
+          "name": "랫풀다운(N)",
+          "sets": [
+            {
+              "weight_kg": 30.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 40.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 45.0,
+              "reps": 6,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1030.0
+        }
+      ],
+      "total_volume": 2130.0,
+      "note": null
+    },
+    {
+      "id": "sqlite_45",
+      "date": "2026-02-24",
+      "week": null,
+      "session_number": 38,
+      "session_type": "workout",
+      "label": "오운동-38",
+      "day_label": "화요일",
+      "exercises": [
+        {
+          "name": "계단",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "매달리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 42.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 27.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 20.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "몸통로테이션",
+          "sets": [
+            {
+              "weight_kg": 15.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": "R"
+            },
+            {
+              "weight_kg": 15.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": "L"
+            },
+            {
+              "weight_kg": 15.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": "N"
+            }
+          ],
+          "total_volume": 840.0
+        },
+        {
+          "name": "원판쓰러스터",
+          "sets": [
+            {
+              "weight_kg": 15.0,
+              "reps": 18,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 13,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 13,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 790.0
+        },
+        {
+          "name": "풀업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "랫풀다운(노멀)",
+          "sets": [
+            {
+              "weight_kg": 30.0,
+              "reps": 13,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 40.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1060.0
+        },
+        {
+          "name": "랫풀다운(언더)",
+          "sets": [
+            {
+              "weight_kg": 35.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 980.0
+        },
+        {
+          "name": "로우(얼터)",
+          "sets": [
+            {
+              "weight_kg": 10.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 22,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 24,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 200.0
+        }
+      ],
+      "total_volume": 3870.0,
+      "note": "매달리기 42초 신기록! 로테이션 양발/노멀 구분 훈련 시작."
+    },
+    {
+      "id": "sqlite_1",
+      "date": "2026-02-23",
+      "week": null,
+      "session_number": 1,
+      "session_type": "workout",
+      "label": "오운동-1",
+      "day_label": "월요일",
+      "exercises": [
+        {
+          "name": "데드행",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 42.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 27.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 20.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "랫풀다운(N)",
+          "sets": [
+            {
+              "weight_kg": 25.0,
+              "reps": 13,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 40.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 995.0
+        },
+        {
+          "name": "원암 덤벨 프레스",
+          "sets": [
+            {
+              "weight_kg": 12.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 14.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 232.0
+        }
+      ],
+      "total_volume": 1227.0,
+      "note": null
+    },
+    {
+      "id": "sqlite_44",
+      "date": "2026-02-20",
+      "week": null,
+      "session_number": 37,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "금요일",
+      "exercises": [
+        {
+          "name": "Breathing with RU bar / Shoulder bridge, Hip lift single leg",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "Spine corrector Scissors - Jack knife Prep",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "Box lunge + 12kg bar biceps curl & Shoulder press / Over head position lunge",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "Box incline push up",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "Wide squat & shrug 6kg KB / Lateral raise",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "Reformer - Sitting Y raise variation + Horizontal abduction",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "더리셋이지만 웨이트 병합 세션 — 박스런지+이두+OHP 콤보, 리포머 Y레이즈."
+    },
+    {
+      "id": "sqlite_43",
+      "date": "2026-02-13",
+      "week": null,
+      "session_number": 36,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "금요일",
+      "exercises": [
+        {
+          "name": "리포머 set",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "jack knife",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "골반/손/어깨/목 바닥에 딱 붙이고 롤오버",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "long spine & short spine",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "골반안정성, 호흡 체크. 롱스파인/솟스파인 동작."
+    },
+    {
+      "id": "sqlite_42",
+      "date": "2026-02-11",
+      "week": null,
+      "session_number": 35,
+      "session_type": "workout",
+      "label": "오운동-35",
+      "day_label": "수요일",
+      "exercises": [
+        {
+          "name": "유산소",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "프론트&백&사이드 서포트",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "유산소 30분 + 코어 서포트 조합. 라이트 데이."
+    },
+    {
+      "id": "sqlite_41",
+      "date": "2026-02-09",
+      "week": null,
+      "session_number": 34,
+      "session_type": "workout",
+      "label": "오운동-34",
+      "day_label": "월요일",
+      "exercises": [
+        {
+          "name": "사이클",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 300.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "매달리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 32.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 30.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 24.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "몸통로테(한발)",
+          "sets": [
+            {
+              "weight_kg": 15.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 15.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1000.0
+        },
+        {
+          "name": "원판쓰러스터",
+          "sets": [
+            {
+              "weight_kg": 15.0,
+              "reps": 18,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 13,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 13,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 790.0
+        },
+        {
+          "name": "(선행 푸쉬업 8회) 풀업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 2,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 2,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 2,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "랫풀다운(노멀)",
+          "sets": [
+            {
+              "weight_kg": 30.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 40.0,
+              "reps": 7,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 920.0
+        },
+        {
+          "name": "랫풀다운(언더)",
+          "sets": [
+            {
+              "weight_kg": 35.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 40.0,
+              "reps": 9,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 45.0,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1005.0
+        },
+        {
+          "name": "랫풀다운(얼터)",
+          "sets": [
+            {
+              "weight_kg": 25.0,
+              "reps": 11,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 14,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 14,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 835.0
+        }
+      ],
+      "total_volume": 4550.0,
+      "note": "풀업 2회 연속 안정화! 랫풀(노멀) 40kg, 몸통로테 20kg. 원판쓰러스터 볼륨 증가."
+    },
+    {
+      "id": "sqlite_40",
+      "date": "2026-02-06",
+      "week": null,
+      "session_number": 33,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "금요일",
+      "exercises": [
+        {
+          "name": "헌드레드",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "다리들고 위에 찍고 내려오기",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "허리받치고 가위차기",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "프론트 서포트",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "백서포트",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "사이드서포트",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "롤업(분절)",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "서포트 시리즈(프론트/백/사이드) — 코어 안정성 훈련."
+    },
+    {
+      "id": "sqlite_39",
+      "date": "2026-02-04",
+      "week": null,
+      "session_number": 32,
+      "session_type": "workout",
+      "label": "오운동-32",
+      "day_label": "수요일",
+      "exercises": [
+        {
+          "name": "계단",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "매달리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 36.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 22.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "몸통로테(한발)",
+          "sets": [
+            {
+              "weight_kg": 15.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 240.0
+        },
+        {
+          "name": "원판쓰러스터",
+          "sets": [
+            {
+              "weight_kg": 15.0,
+              "reps": 17,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 735.0
+        },
+        {
+          "name": "푸쉬업 선행",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "풀업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 2,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "랫풀다운(노멀)",
+          "sets": [
+            {
+              "weight_kg": 30.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1200.0
+        },
+        {
+          "name": "랫풀다운(언더)",
+          "sets": [
+            {
+              "weight_kg": 40.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 45.0,
+              "reps": 7,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 45.0,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 940.0
+        },
+        {
+          "name": "랫풀다운(얼터)",
+          "sets": [
+            {
+              "weight_kg": 25.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 25.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 25.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 800.0
+        },
+        {
+          "name": "시티드로우",
+          "sets": [
+            {
+              "weight_kg": 30.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 30.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 35.0,
+              "reps": 6,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 750.0
+        }
+      ],
+      "total_volume": 4665.0,
+      "note": "랫풀다운(언더) 45kg 도달! 시티드로우 35kg. 풀업 전 푸쉬업 선행 패턴."
+    },
+    {
+      "id": "sqlite_38",
+      "date": "2026-01-30",
+      "week": null,
+      "session_number": 31,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "금요일",
+      "exercises": [
+        {
+          "name": "on reformer",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "elephant",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "up stretch",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "arabesque",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "balance control front",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "리포머 기반 필라테스 세션."
+    },
+    {
+      "id": "sqlite_37",
+      "date": "2026-01-26",
+      "week": null,
+      "session_number": 29,
+      "session_type": "workout",
+      "label": "오운동-29",
+      "day_label": "월요일",
+      "exercises": [
+        {
+          "name": "계단",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "몸통로테이션",
+          "sets": [
+            {
+              "weight_kg": 15.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 15.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 16,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 860.0
+        },
+        {
+          "name": "레슬러덤벨",
+          "sets": [
+            {
+              "weight_kg": 10.0,
+              "reps": 26,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 30,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 30,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 260.0
+        },
+        {
+          "name": "매달리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 28.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 35.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 23.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "OHP",
+          "sets": [
+            {
+              "weight_kg": 0.0,
+              "reps": 14,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 5.0,
+              "reps": 7,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 7.5,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 72.5
+        },
+        {
+          "name": "머신윗가슴",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 10.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 15.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 240.0
+        },
+        {
+          "name": "원판레이즈",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 25,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 28,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 1432.5,
+      "note": "몸통로테이션 20kg 도달. 레슬러덤벨 10kg. 원판레이즈 3방향 변형."
+    },
+    {
+      "id": "sqlite_36",
+      "date": "2026-01-22",
+      "week": null,
+      "session_number": 28,
+      "session_type": "workout",
+      "label": "오운동-28",
+      "day_label": "목요일",
+      "exercises": [
+        {
+          "name": "계단",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 300.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "매달리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 37.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 37.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 19.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "KB런지",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "이두컬(홀드)",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 4,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 3,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "몸통로테이션",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "레니게이드로우",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "풀업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 1,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 2,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 2,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "매달리기 37초 PR! 풀업 후반 2회 연속 달성. KB런지 20kg 총중량."
+    },
+    {
+      "id": "sqlite_35",
+      "date": "2026-01-20",
+      "week": null,
+      "session_number": 27,
+      "session_type": "workout",
+      "label": "오운동-27",
+      "day_label": "화요일",
+      "exercises": [
+        {
+          "name": "턱걸이",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 2,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "매달리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 15.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 20.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 10.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "OHP",
+          "sets": [
+            {
+              "weight_kg": 0.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 5.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 7.5,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 87.5
+        },
+        {
+          "name": "DB프레스",
+          "sets": [
+            {
+              "weight_kg": 8.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 10.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 12.0,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 360.0
+        },
+        {
+          "name": "케이블레이즈",
+          "sets": [
+            {
+              "weight_kg": 10.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 7.5,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 7.5,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 230.0
+        },
+        {
+          "name": "유산소 30분 (5mph×5m, 6mph×4m, 10mph×3m, 5mph×3m, 8&6mph×3m&2m×3set)",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 677.5,
+      "note": "턱걸이 2회×5세트 달성! DB프레스 12kg까지 점진적 증가. 런닝 10mph 도달."
+    },
+    {
+      "id": "sqlite_34",
+      "date": "2026-01-19",
+      "week": null,
+      "session_number": 26,
+      "session_type": "workout",
+      "label": "오운동-26",
+      "day_label": "월요일",
+      "exercises": [
+        {
+          "name": "이두컬",
+          "sets": [
+            {
+              "weight_kg": 6.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 8.0,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 8.0,
+              "reps": 4,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 144.0
+        },
+        {
+          "name": "데드행",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 2,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "랫풀다운(패러럴)",
+          "sets": [
+            {
+              "weight_kg": 25.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 25.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 25.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 750.0
+        },
+        {
+          "name": "랫풀다운(언더)",
+          "sets": [
+            {
+              "weight_kg": 30.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 30.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 30.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 900.0
+        },
+        {
+          "name": "랫풀다운(얼터너티브)",
+          "sets": [
+            {
+              "weight_kg": 25.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 25.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 25.0,
+              "reps": 9,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 725.0
+        }
+      ],
+      "total_volume": 2519.0,
+      "note": "랫풀다운 3가지 그립 변형 — 패러럴/언더/얼터. 체계적 등 훈련 시작."
+    },
+    {
+      "id": "sqlite_33",
+      "date": "2026-01-16",
+      "week": null,
+      "session_number": 25,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "금요일",
+      "exercises": [
+        {
+          "name": "전완 세팅 (외회전 포인트)",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "맥길 박사 풀업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "백&행잉 프론트",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "캐딜락 버티컬",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "인버티드 로우",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "대흉근 풀기",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "플라이",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "사선 레이즈",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "푸쉬프레스",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "대흉근 늘리면서 광배 움직임",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "암풀다운",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "원암 사선 당기기 (손날 1세트, 손바닥 1세트)",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "전완 외회전이 포인트. 원암 사선 당기기 포인트=시선! 갈고리로 훑듯이 가져오기 궤적 → 광배근 사용 유도."
+    },
+    {
+      "id": "sqlite_32",
+      "date": "2026-01-14",
+      "week": null,
+      "session_number": 24,
+      "session_type": "workout",
+      "label": "오운동-24",
+      "day_label": "수요일",
+      "exercises": [
+        {
+          "name": "런닝",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "매달리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 30.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 23.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 20.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 23.0,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 18.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "몫통돌리기",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "케이블 푸쉬다운",
+          "sets": [
+            {
+              "weight_kg": 7.5,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 10.0,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0.0
+        },
+        {
+          "name": "케이블로우",
+          "sets": [
+            {
+              "weight_kg": 20.0,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 25.0,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 25.0,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0.0
+        }
+      ],
+      "total_volume": 0.0,
+      "note": "런닝 8mph 도달. 매달리기 5세트로 그립 강화. 케이블 운동 추가."
+    },
+    {
+      "id": "sqlite_31",
+      "date": "2026-01-08",
+      "week": null,
+      "session_number": 23,
+      "session_type": "workout",
+      "label": "오운동-23",
+      "day_label": "목요일",
+      "exercises": [
+        {
+          "name": "데드행",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 15,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "로우",
+          "sets": [
+            {
+              "weight_kg": 30.0,
+              "reps": 15,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 40.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 50.0,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 1100.0
+        },
+        {
+          "name": "랫풀다운",
+          "sets": [
+            {
+              "weight_kg": 20.0,
+              "reps": 15,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 20.0,
+              "reps": 15,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": 25.0,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 850.0
+        },
+        {
+          "name": "데드리프트",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 1950.0,
+      "note": "로우 50kg 도달. 랫풀다운 체계적 세트 기록 시작."
+    },
+    {
+      "id": "sqlite_30",
+      "date": "2025-12-23",
+      "week": null,
+      "session_number": 22,
+      "session_type": "workout",
+      "label": "오운동-22",
+      "day_label": "화요일",
+      "exercises": [
+        {
+          "name": "폼롤러",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "L무브",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "밴드어깨",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "스티프 데드리프트",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "덤벨로우",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "사레레",
+          "sets": [
+            {
+              "weight_kg": 5.0,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0.0
+        },
+        {
+          "name": "푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 14,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 12,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0.0,
+      "note": "푸쉬업 14/12 — 오운동-11(10/10/10) 대비 1세트 최대 증가."
+    },
+    {
+      "id": "sqlite_29",
+      "date": "2025-12-18",
+      "week": null,
+      "session_number": 21,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "목요일",
+      "exercises": [],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_28",
+      "date": "2025-12-09",
+      "week": null,
+      "session_number": 20,
+      "session_type": "workout",
+      "label": "오운동-20",
+      "day_label": "화요일",
+      "exercises": [
+        {
+          "name": "런닝",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "풀업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "데드리프트",
+          "sets": [
+            {
+              "weight_kg": 80.0,
+              "reps": 3,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 240.0
+        },
+        {
+          "name": "풀다운",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "풀오버",
+          "sets": [
+            {
+              "weight_kg": 8.0,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0.0
+        },
+        {
+          "name": "덤벨 푸쉬",
+          "sets": [
+            {
+              "weight_kg": 8.0,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 160.0
+        }
+      ],
+      "total_volume": 400.0,
+      "note": "데드리프트 80kg 달성! 런닝 6.5mph 15분 유산소 병행."
+    },
+    {
+      "id": "sqlite_27",
+      "date": "2025-12-04",
+      "week": null,
+      "session_number": 19,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "목요일",
+      "exercises": [],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_26",
+      "date": "2025-12-01",
+      "week": null,
+      "session_number": 18,
+      "session_type": "workout",
+      "label": "오운동-18",
+      "day_label": "월요일",
+      "exercises": [
+        {
+          "name": "아놀드프레스",
+          "sets": [
+            {
+              "weight_kg": 8.0,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0.0
+        },
+        {
+          "name": "OHP",
+          "sets": [
+            {
+              "weight_kg": 40.0,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 200.0
+        },
+        {
+          "name": "사레레",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "리버스펙덱플라이",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "로우",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "런닝",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 200.0,
+      "note": "런닝 속도 존 파악 목적: 노르딕식 유산소 트레이닝 존1~4 탐색. 6mph=헐떡, 4mph=적당."
+    },
+    {
+      "id": "sqlite_25",
+      "date": "2025-11-30",
+      "week": null,
+      "session_number": 17,
+      "session_type": "workout",
+      "label": "오운동-17",
+      "day_label": "일요일",
+      "exercises": [
+        {
+          "name": "스쿼트",
+          "sets": [
+            {
+              "weight_kg": 80.0,
+              "reps": 4,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 320.0
+        },
+        {
+          "name": "OHP",
+          "sets": [
+            {
+              "weight_kg": 40.0,
+              "reps": 4,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 160.0
+        },
+        {
+          "name": "풀업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "풀다운",
+          "sets": [
+            {
+              "weight_kg": 17.5,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0.0
+        },
+        {
+          "name": "스티프 데드리프트",
+          "sets": [
+            {
+              "weight_kg": 8.0,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0.0
+        }
+      ],
+      "total_volume": 480.0,
+      "note": "스쿼트 80kg, OHP 40kg — 웨이트 2번째 세션인데 큰 중량 시도."
+    },
+    {
+      "id": "sqlite_24",
+      "date": "2025-11-26",
+      "week": null,
+      "session_number": 16,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "수요일",
+      "exercises": [],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_23",
+      "date": "2025-11-25",
+      "week": null,
+      "session_number": 15,
+      "session_type": "workout",
+      "label": "오운동-15",
+      "day_label": "화요일",
+      "exercises": [
+        {
+          "name": "데드리프트",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "매달리기",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "우드챩",
+          "sets": [
+            {
+              "weight_kg": 17.2,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0.0
+        },
+        {
+          "name": "로우",
+          "sets": [
+            {
+              "weight_kg": 40.0,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0.0
+        }
+      ],
+      "total_volume": 0.0,
+      "note": "⭐ 짐박스 등록, 웨이트 시작!! 데드리프트 20kg으로 첫 웨이트 세션."
+    },
+    {
+      "id": "sqlite_22",
+      "date": "2025-11-23",
+      "week": null,
+      "session_number": 14,
+      "session_type": "workout",
+      "label": "오운동-14",
+      "day_label": "일요일",
+      "exercises": [
+        {
+          "name": "빠른 푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "양발들고내리기 푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "호이짜",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "다리 앞뒤로",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "다리 업&다운",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "슈퍼맨",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": 30.0,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "슈퍼맨 자세 위아래",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_21",
+      "date": "2025-11-20",
+      "week": null,
+      "session_number": 13,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "목요일",
+      "exercises": [
+        {
+          "name": "롤업",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "롤백",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "푸쉬프레스",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "코어",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "옆구리",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "엎드려서 밀기",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "스완",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "전면버티기 (캐딜락)",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "후면버티기 (캐딜락)",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "엎드려서 밀기 포인트: 궁뎅이·발꼽치·피크 정렬 → 후면텐션 유지가 핵심."
+    },
+    {
+      "id": "sqlite_20",
+      "date": "2025-11-18",
+      "week": null,
+      "session_number": 12,
+      "session_type": "workout",
+      "label": "오운동-12",
+      "day_label": "화요일",
+      "exercises": [
+        {
+          "name": "푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "쓰러스터",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "밴드어깨",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "덤벨풍차",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "덤벨쓰로잉",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "덤벨사레레",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "폼롤러",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "고관절 스트레칭",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "가장 다양한 운동 구성. 8종목."
+    },
+    {
+      "id": "sqlite_19",
+      "date": "2025-11-17",
+      "week": null,
+      "session_number": 11,
+      "session_type": "workout",
+      "label": "오운동-11",
+      "day_label": "월요일",
+      "exercises": [
+        {
+          "name": "푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "덤벨풍차",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "덤벨쓰로잉",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "푸쉬업 10/10/10 달성 — 일관된 세트 유지!"
+    },
+    {
+      "id": "sqlite_18",
+      "date": "2025-11-08",
+      "week": null,
+      "session_number": 10,
+      "session_type": "workout",
+      "label": "오운동-10",
+      "day_label": "토요일",
+      "exercises": [
+        {
+          "name": "숙제 2일차",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 9,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 7,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 3,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "숙제 수행 2일차. 푸쉬업 소폭 하락."
+    },
+    {
+      "id": "sqlite_17",
+      "date": "2025-11-07",
+      "week": null,
+      "session_number": 9,
+      "session_type": "workout",
+      "label": "오운동-9",
+      "day_label": "금요일",
+      "exercises": [
+        {
+          "name": "숙제 1일차",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 4,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "오운동-8 더리셋에서 받은 숙제 수행 1일차."
+    },
+    {
+      "id": "sqlite_16",
+      "date": "2025-11-05",
+      "week": null,
+      "session_number": 8,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "수요일",
+      "exercises": [
+        {
+          "name": "어깨진단",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "삼각근/광배/폼롤러 스트레칭",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "극하근·극상근 가동성 훈련",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "움직임패턴 고정",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "네발기기 → 극하근 버티기",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "어깨진단: 삼각근·광배·폼롤러 스트레칭 필요, 극하근·극상근 가동성 필요, 움직임패턴 고정. 숙제: 1)덤벨 돌리기 풍차 2)덤벨 옆으로 돌리기 3)덤벨 앞으로 내밀기. 남자한테 좋은 스트레칭 배움."
+    },
+    {
+      "id": "sqlite_15",
+      "date": "2025-11-01",
+      "week": null,
+      "session_number": 7,
+      "session_type": "workout",
+      "label": "오운동-7",
+      "day_label": "토요일",
+      "exercises": [
+        {
+          "name": "하체풀기 set",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "런지",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "덤벨던지기",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "사레레",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_14",
+      "date": "2025-10-31",
+      "week": null,
+      "session_number": 6,
+      "session_type": "workout",
+      "label": "오운동-6",
+      "day_label": "금요일",
+      "exercises": [
+        {
+          "name": "푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 11,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 7,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 4,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 5,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "밴드로우",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "로우",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "상체밴드",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "덤벨던지기",
+          "sets": [],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_13",
+      "date": "2025-10-30",
+      "week": null,
+      "session_number": 5,
+      "session_type": "workout",
+      "label": "오운동-5",
+      "day_label": "목요일",
+      "exercises": [
+        {
+          "name": "상체밴드",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "아놀드프레스(변형)",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 8,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 4,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 6,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_12",
+      "date": "2025-10-29",
+      "week": null,
+      "session_number": 4,
+      "session_type": "workout",
+      "label": "오운동-4",
+      "day_label": "수요일",
+      "exercises": [
+        {
+          "name": "SNPE",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 30,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_11",
+      "date": "2025-10-28",
+      "week": null,
+      "session_number": 3,
+      "session_type": "reset",
+      "label": "더리셋",
+      "day_label": "화요일",
+      "exercises": [
+        {
+          "name": "목풀기",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "바이킹 at 캐딜락",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "광배늘리기",
+          "sets": [],
+          "total_volume": 0
+        },
+        {
+          "name": "체어",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "블럭",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": null,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": null
+    },
+    {
+      "id": "sqlite_10",
+      "date": "2025-10-27",
+      "week": null,
+      "session_number": 2,
+      "session_type": "workout",
+      "label": "오운동-2",
+      "day_label": "월요일",
+      "exercises": [
+        {
+          "name": "로우",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 20,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 30,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 25,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "SLR",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 15,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 13,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "날짜 미상 (추정). 맨몸 운동 위주."
+    },
+    {
+      "id": "sqlite_9",
+      "date": "2025-10-25",
+      "week": null,
+      "session_number": 1,
+      "session_type": "workout",
+      "label": "오운동-1",
+      "day_label": "토요일",
+      "exercises": [
+        {
+          "name": "푸쉬업",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 10,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 9,
+              "duration_sec": null,
+              "side": null
+            },
+            {
+              "weight_kg": null,
+              "reps": 6,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "상체운동",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 30,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        },
+        {
+          "name": "스쿼트",
+          "sets": [
+            {
+              "weight_kg": null,
+              "reps": 60,
+              "duration_sec": null,
+              "side": null
+            }
+          ],
+          "total_volume": 0
+        }
+      ],
+      "total_volume": 0,
+      "note": "날짜 미상 (추정). 맨몸 운동 위주 초기 세션."
+    }
+  ],
+  "bodyMetrics": [
+    {
+      "id": "sqlite_24",
+      "date": "2026-03-08",
+      "weight_kg": 88.0,
+      "skeletal_muscle_kg": 36.3,
+      "body_fat_pct": 26.9,
+      "bmi": 27.8,
+      "body_fat_kg": 23.6,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_23",
+      "date": "2024-04-22",
+      "weight_kg": 75.2,
+      "skeletal_muscle_kg": 34.3,
+      "body_fat_pct": 19.3,
+      "bmi": 23.7,
+      "body_fat_kg": 14.5,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_22",
+      "date": "2024-04-17",
+      "weight_kg": 75.3,
+      "skeletal_muscle_kg": 33.9,
+      "body_fat_pct": 20.3,
+      "bmi": 23.8,
+      "body_fat_kg": 15.3,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_21",
+      "date": "2024-03-24",
+      "weight_kg": 76.2,
+      "skeletal_muscle_kg": 34.2,
+      "body_fat_pct": 20.5,
+      "bmi": 24.0,
+      "body_fat_kg": 15.6,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_20",
+      "date": "2024-02-05",
+      "weight_kg": 75.6,
+      "skeletal_muscle_kg": 35.0,
+      "body_fat_pct": 18.3,
+      "bmi": 23.9,
+      "body_fat_kg": 13.8,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_19",
+      "date": "2023-12-27",
+      "weight_kg": 74.0,
+      "skeletal_muscle_kg": 33.4,
+      "body_fat_pct": 20.4,
+      "bmi": 23.4,
+      "body_fat_kg": 15.1,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_18",
+      "date": "2023-12-11",
+      "weight_kg": 74.9,
+      "skeletal_muscle_kg": 34.6,
+      "body_fat_pct": 18.7,
+      "bmi": 23.6,
+      "body_fat_kg": 14.0,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_17",
+      "date": "2023-11-15",
+      "weight_kg": 75.9,
+      "skeletal_muscle_kg": 34.9,
+      "body_fat_pct": 18.6,
+      "bmi": 24.0,
+      "body_fat_kg": 14.1,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_16",
+      "date": "2023-11-13",
+      "weight_kg": 75.5,
+      "skeletal_muscle_kg": 34.6,
+      "body_fat_pct": 19.1,
+      "bmi": 23.8,
+      "body_fat_kg": 14.4,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_15",
+      "date": "2023-11-10",
+      "weight_kg": 74.8,
+      "skeletal_muscle_kg": 34.7,
+      "body_fat_pct": 18.3,
+      "bmi": 23.6,
+      "body_fat_kg": 13.7,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_14",
+      "date": "2023-11-08",
+      "weight_kg": 75.7,
+      "skeletal_muscle_kg": 33.1,
+      "body_fat_pct": 22.4,
+      "bmi": 23.9,
+      "body_fat_kg": 17.0,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_13",
+      "date": "2023-11-06",
+      "weight_kg": 74.2,
+      "skeletal_muscle_kg": 34.5,
+      "body_fat_pct": 18.2,
+      "bmi": 23.4,
+      "body_fat_kg": 13.5,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_12",
+      "date": "2023-10-26",
+      "weight_kg": 74.3,
+      "skeletal_muscle_kg": 33.9,
+      "body_fat_pct": 19.8,
+      "bmi": 23.5,
+      "body_fat_kg": 14.7,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_11",
+      "date": "2023-10-23",
+      "weight_kg": 75.4,
+      "skeletal_muscle_kg": 34.5,
+      "body_fat_pct": 19.4,
+      "bmi": 23.8,
+      "body_fat_kg": 14.6,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_10",
+      "date": "2023-10-16",
+      "weight_kg": 76.0,
+      "skeletal_muscle_kg": 35.2,
+      "body_fat_pct": 18.3,
+      "bmi": 24.0,
+      "body_fat_kg": 13.9,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_9",
+      "date": "2023-10-03",
+      "weight_kg": 75.6,
+      "skeletal_muscle_kg": 35.1,
+      "body_fat_pct": 18.3,
+      "bmi": 23.9,
+      "body_fat_kg": 13.8,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_8",
+      "date": "2023-09-24",
+      "weight_kg": 74.8,
+      "skeletal_muscle_kg": 35.3,
+      "body_fat_pct": 16.8,
+      "bmi": 23.6,
+      "body_fat_kg": 12.6,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_7",
+      "date": "2023-08-31",
+      "weight_kg": 75.1,
+      "skeletal_muscle_kg": 35.1,
+      "body_fat_pct": 17.6,
+      "bmi": 23.7,
+      "body_fat_kg": 13.2,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_6",
+      "date": "2023-08-30",
+      "weight_kg": 74.8,
+      "skeletal_muscle_kg": 35.6,
+      "body_fat_pct": 16.5,
+      "bmi": 23.6,
+      "body_fat_kg": 12.3,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_5",
+      "date": "2023-08-28",
+      "weight_kg": 74.6,
+      "skeletal_muscle_kg": 35.2,
+      "body_fat_pct": 17.1,
+      "bmi": 23.5,
+      "body_fat_kg": 12.8,
+      "visceral_fat": null
+    },
+    {
+      "id": "sqlite_4",
+      "date": "2023-08-27",
+      "weight_kg": 74.8,
+      "skeletal_muscle_kg": 35.0,
+      "body_fat_pct": 17.5,
+      "bmi": 23.6,
+      "body_fat_kg": 13.1,
+      "visceral_fat": null
+    }
+  ],
+  "exportDate": "2026-03-12"
+}

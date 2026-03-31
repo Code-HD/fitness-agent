@@ -1,0 +1,13 @@
+storage:
+  backend: sqlite
+  path: data/fitness.db
+
+ai:
+  model: claude-sonnet-4-20250514
+  max_tokens: 1024
+
+units:
+  weight: kg
+  distance: km
+
+locale: ko

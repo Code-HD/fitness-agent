@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find . -name TODO* -o -name *.todo -o -name ROADMAP* -o -name PLAN*)",
+      "Bash(python3 -c \":*)",
+      "Bash(xargs ls:*)",
+      "Bash(wc -l /Users/shinheejae/Fitness/core/*.py /Users/shinheejae/Fitness/mcp_server/*.py /Users/shinheejae/Fitness/cli/*.py)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"Initial commit: Fitness Agent baseline:*)"
+    ]
+  }
+}

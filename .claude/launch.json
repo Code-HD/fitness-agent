@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dashboard",
+      "runtimeExecutable": "/Users/shinheejae/.pyenv/versions/3.11.12/bin/python",
+      "runtimeArgs": ["/Users/shinheejae/Fitness/web/app.py"],
+      "port": 8000
+    },
+    {
+      "name": "fitness-app",
+      "runtimeExecutable": "/Users/shinheejae/.pyenv/versions/3.11.12/bin/python",
+      "runtimeArgs": ["-m", "http.server", "8090", "--directory", "/Users/shinheejae/Fitness/app"],
+      "port": 8090
+    }
+  ]
+}

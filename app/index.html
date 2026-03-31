@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>오운동 시리즈</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="오운동">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='32' fill='%23b45309'/%3E%3Ctext x='90' y='120' text-anchor='middle' font-size='100'%3E🏋️%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+        :root{
+            --bg:#050505;--surface:#0c0c0c;--surface2:#111;--surface3:#191919;
+            --border:#1a1a1a;--border2:#252525;
+            --text:#f0f0f0;--text2:#888;--text3:#4a4a4a;
+            --accent:#d4a052;--accent-dim:#9a7039;--accent-glow:#d4a05210;
+            --green:#4ade80;--green-dim:#22c55e;
+            --red:#f87171;--red-dim:#ef4444;
+            --blue:#60a5fa;--purple:#a78bfa;
+            --radius:14px;--radius-sm:10px;
+            --sp:8px; /* base spacing unit */
+        }
+        body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;overflow-x:hidden;font-feature-settings:'tnum';line-height:1.5}
+
+        /* ===== SCREENS ===== */
+        .screen{display:none;min-height:100dvh}.screen.active{display:flex;flex-direction:column}
+        .center-screen{align-items:center;justify-content:center;padding:24px;text-align:center}
+        .logo{font-size:48px;margin-bottom:12px;filter:drop-shadow(0 0 20px #d4a05240)}
+        .title{font-size:24px;font-weight:800;letter-spacing:-0.5px}
+        .subtitle{color:var(--text2);font-size:13px;margin:8px 0 32px;line-height:1.6}
+
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit}
+        .btn-accent{background:var(--accent);color:#000}.btn-accent:active{background:var(--accent-dim);transform:scale(.97)}
+        .btn-white{background:#fff;color:#111}.btn-white:active{background:#e5e5e5}
+        .btn-ghost{background:none;border:1px solid var(--border2);color:var(--text2);font-size:13px;padding:10px 20px}
+        .btn-sm{padding:8px 16px;font-size:13px}
+
+        /* ===== APP SHELL ===== */
+        .app-screen{padding-bottom:72px}
+        .app-bar{position:sticky;top:0;z-index:100;background:var(--bg);padding:12px 20px;display:flex;justify-content:space-between;align-items:center}
+        .app-bar-title{font-size:15px;font-weight:700;color:var(--text2);letter-spacing:-.2px}
+        .avatar{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--accent);cursor:pointer;opacity:.8}
+
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--surface);border-top:1px solid var(--border);display:flex;padding:4px 0;padding-bottom:max(4px,env(safe-area-inset-bottom))}
+        .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 4px;border:none;background:none;color:var(--text3);font-size:9px;font-weight:500;cursor:pointer;font-family:inherit;transition:color .15s}
+        .nav-btn.active{color:var(--accent)}.nav-btn .ico{font-size:18px;height:22px}
+
+        .tab{display:none;padding:0 20px 20px}.tab.active{display:block}
+        @media(min-width:768px){.tab{max-width:540px;margin:0 auto}}
+
+        /* ===== WEEK HERO ===== */
+        .wk-hero{margin-bottom:calc(var(--sp)*3)}
+        .wk-num{font-size:11px;font-weight:600;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:4px}
+        .wk-title{font-size:32px;font-weight:800;letter-spacing:-1px;line-height:1.1}
+        .wk-range{font-size:12px;color:var(--text3);margin-top:4px}
+
+        /* ===== WEEK DOTS ===== */
+        .wk-dots{display:flex;gap:calc(var(--sp)*1);margin:calc(var(--sp)*2.5) 0}
+        .wk-dot{flex:1;text-align:center;padding:10px 0;border-radius:var(--radius-sm);background:var(--surface2);border:1px solid var(--border);transition:all .2s}
+        .wk-dot.done{border-color:var(--accent);background:#d4a05208}
+        .wk-dot.today{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+        .wk-dot-day{font-size:10px;color:var(--text3);font-weight:500}
+        .wk-dot.done .wk-dot-day{color:var(--accent)}
+        .wk-dot-ind{width:5px;height:5px;border-radius:50%;background:var(--border);margin:5px auto 0}
+        .wk-dot.done .wk-dot-ind{background:var(--accent)}
+
+        /* ===== WEEK STATS ROW ===== */
+        .wk-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:calc(var(--sp)*3)}
+        .wk-stat{background:var(--surface2);padding:16px 14px;text-align:center}
+        .wk-stat-val{font-size:20px;font-weight:800;letter-spacing:-.5px}
+        .wk-stat-lbl{font-size:10px;color:var(--text3);margin-top:2px}
+        .wk-stat-delta{font-size:10px;font-weight:600;margin-top:3px}
+        .wk-stat-delta.up{color:var(--green)}.wk-stat-delta.down{color:var(--red)}.wk-stat-delta.same{color:var(--text3)}
+
+        /* ===== SECTION ===== */
+        .sec{margin-bottom:calc(var(--sp)*3)}
+        .sec-title{font-size:12px;font-weight:600;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:calc(var(--sp)*1.5);display:flex;align-items:center;justify-content:space-between}
+        .sec-title .more{font-size:11px;color:var(--text3);cursor:pointer;text-transform:none;letter-spacing:0;font-weight:400}
+
+        /* ===== EXERCISE VOLUME ROWS ===== */
+        .ex-row{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
+        .ex-row:last-child{border-bottom:none}
+        .ex-name{font-size:13px;font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .ex-vals{display:flex;align-items:center;gap:8px;flex-shrink:0}
+        .ex-vol{font-size:14px;font-weight:700;min-width:52px;text-align:right}
+        .ex-delta{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;min-width:44px;text-align:center}
+        .ex-delta.up{color:var(--green);background:#4ade8010}.ex-delta.down{color:var(--red);background:#f8717110}
+        .ex-delta.new{color:var(--blue);background:#60a5fa10}.ex-delta.same{color:var(--text3)}
+
+        /* ===== CHART ===== */
+        .chart-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+        .chart-box canvas{max-height:160px}
+
+        /* ===== BODY COMPACT ===== */
+        .body-bar{display:flex;align-items:center;gap:16px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+        .body-weight{font-size:28px;font-weight:800;letter-spacing:-1px}
+        .body-weight small{font-size:13px;color:var(--text2);font-weight:400}
+        .body-mets{display:flex;gap:16px}
+        .body-met{text-align:center}
+        .body-met-val{font-size:14px;font-weight:700}
+        .body-met-lbl{font-size:9px;color:var(--text3)}
+        .body-bar .sep{width:1px;height:32px;background:var(--border)}
+
+        /* ===== SESSION LIST ===== */
+        .s-item{padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer}
+        .s-item:last-child{border-bottom:none}
+        .s-row{display:flex;justify-content:space-between;align-items:center}
+        .s-label{font-size:13px;font-weight:600}.s-label.w{color:var(--accent)}.s-label.r{color:var(--purple)}
+        .s-date{font-size:11px;color:var(--text3)}
+        .s-exs{font-size:11px;color:var(--text2);margin-top:3px;line-height:1.4}
+        .s-vol{font-size:11px;color:var(--accent);font-weight:600;margin-top:2px}
+
+        /* ===== INSIGHT ===== */
+        .insight{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:calc(var(--sp)*3)}
+        .insight h3{font-size:12px;color:var(--accent);margin-bottom:8px;font-weight:600}
+        .insight p{font-size:12px;color:var(--text2);line-height:1.7;white-space:pre-wrap}
+        .insight-loading{text-align:center;padding:20px;color:var(--text3)}
+        .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* ===== LOG TAB ===== */
+        .log-type-row{display:flex;gap:10px;margin-bottom:20px}
+        .log-type{flex:1;padding:14px;border-radius:var(--radius);border:1.5px solid var(--border);background:var(--surface);color:var(--text3);font-size:14px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s;font-family:inherit}
+        .log-type.active{border-color:var(--accent);color:var(--accent)}
+        .log-type .type-ico{font-size:24px;display:block;margin-bottom:4px}
+        .field{margin-bottom:14px}.field-label{font-size:11px;font-weight:600;color:var(--text3);margin-bottom:6px;display:block}
+        .field-row{display:flex;gap:10px}
+        .input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;color:var(--text);font-size:14px;font-family:inherit}
+        .input:focus{outline:none;border-color:var(--accent)}.input::placeholder{color:var(--text3)}
+        .textarea{min-height:150px;line-height:1.8;resize:vertical}
+        .hint{font-size:11px;color:var(--text3);margin-top:8px;line-height:1.5;background:var(--surface);padding:10px 12px;border-radius:8px}
+        .hint code{background:var(--border2);padding:1px 5px;border-radius:4px;font-size:10px}
+        .preview{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-top:10px}
+        .preview-ex{margin-bottom:6px}.preview-name{font-size:12px;font-weight:600;color:var(--accent)}.preview-sets{font-size:11px;color:var(--text2)}
+        .sticky-save{position:sticky;bottom:80px;padding:10px 0;background:linear-gradient(transparent,var(--bg) 30%)}
+        .save-btn{width:100%;padding:16px;font-size:15px;font-weight:700;border-radius:var(--radius)}
+
+        /* ===== BODY TAB ===== */
+        .body-hero-tab{text-align:center;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+        .body-big{font-size:48px;font-weight:800;color:var(--accent);letter-spacing:-2px}
+        .body-big small{font-size:18px;color:var(--text2);font-weight:400}
+        .body-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px}
+        .body-metric{text-align:center}.body-metric-val{font-size:18px;font-weight:700}.body-metric-lbl{font-size:10px;color:var(--text3);margin-top:2px}
+        .body-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+        /* ===== HISTORY ===== */
+        .chips{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto}
+        .chip{padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--text3);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;font-family:inherit}
+        .chip.active{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+
+        /* ===== SETTINGS ===== */
+        .setting-group{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:14px;overflow:hidden}
+        .setting-row{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+        .setting-row:last-child{border-bottom:none}
+        .setting-name{font-size:13px;font-weight:500}.setting-desc{font-size:11px;color:var(--text3);margin-top:2px}
+        .badge{font-size:11px;padding:3px 8px;border-radius:6px;font-weight:600}
+        .badge-ok{background:#4ade8020;color:var(--green)}.badge-no{background:#f8717120;color:var(--red)}
+
+        /* ===== MODAL ===== */
+        .modal-bg{display:none;position:fixed;inset:0;background:#000b;z-index:300;align-items:flex-end;justify-content:center}
+        .modal-bg.active{display:flex}
+        .modal{background:var(--surface);border-radius:20px 20px 0 0;width:100%;max-width:500px;max-height:80dvh;overflow-y:auto;padding:24px 20px;padding-bottom:max(24px,env(safe-area-inset-bottom))}
+        .modal-bar{width:36px;height:4px;background:var(--border2);border-radius:2px;margin:0 auto 16px}
+        .modal-title{font-size:17px;font-weight:700;margin-bottom:16px}
+
+        .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--accent);color:#000;padding:10px 22px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
+        .toast.show{opacity:1}
+
+        /* ===== PC LAYOUT ===== */
+        @media(min-width:768px){
+            .stats-row{grid-template-columns:repeat(4,1fr)}
+            .bottom-nav{max-width:420px;left:50%;transform:translateX(-50%);border-radius:14px 14px 0 0}
+        }
+        @media(min-width:1024px){
+            .tab{max-width:680px;padding:0 32px 32px}
+            .app-bar{max-width:680px;margin:0 auto;padding:16px 32px}
+            .dash-2col{display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--sp)*3)}
+            .s-item{transition:background .15s}.s-item:hover{background:var(--surface2)}
+        }
+    </style>
+</head>
+<body>
+
+<!-- SETUP -->
+<div id="setupScreen" class="screen center-screen">
+    <div class="logo">🏋️</div>
+    <div class="title">오운동 시리즈</div>
+    <div class="subtitle">Firebase 설정이 필요합니다<br>Console에서 웹 앱 설정을 복사해 붙여넣으세요</div>
+    <textarea id="firebaseConfigInput" class="input textarea" style="max-width:500px;min-height:120px;font-family:monospace;font-size:12px;" placeholder='{"apiKey":"...","projectId":"..."}'></textarea>
+    <div style="margin-top:12px;display:flex;gap:10px;">
+        <button class="btn btn-accent" onclick="saveFirebaseConfig()">설정 저장</button>
+        <button class="btn btn-ghost" onclick="useLocalMode()">로컬 모드</button>
+    </div>
+</div>
+
+<!-- LOGIN -->
+<div id="loginScreen" class="screen center-screen">
+    <div class="logo">🏋️</div>
+    <div class="title">오운동 시리즈</div>
+    <div class="subtitle">거대하고 강력한 몸, 완벽한 지배<br>오타니 · 마카체프</div>
+    <button class="btn btn-white" onclick="googleLogin()">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Google로 로그인
+    </button>
+    <button class="btn btn-ghost" style="margin-top:10px;" onclick="skipLogin()">로그인 없이</button>
+</div>
+
+<!-- MAIN APP -->
+<div id="appScreen" class="screen app-screen">
+    <div class="app-bar">
+        <div class="app-bar-title">오운동 시리즈</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <span id="syncStatus" style="width:5px;height:5px;border-radius:50%;background:var(--green);display:none"></span>
+            <img id="userAvatar" class="avatar" src="" alt="" style="display:none" onclick="showSettings()">
+        </div>
+    </div>
+
+    <!-- ===== DASHBOARD ===== -->
+    <div id="tabDash" class="tab active">
+
+        <!-- Week Hero -->
+        <div class="wk-hero">
+            <div class="wk-num" id="wkNum">WEEK 11</div>
+            <div class="wk-title" id="wkTitle">이번 주</div>
+            <div class="wk-range" id="wkRange">3월 9일 — 3월 15일</div>
+        </div>
+
+        <!-- Week Days -->
+        <div class="wk-dots" id="wkDots"></div>
+
+        <!-- Week Stats -->
+        <div class="wk-stats" id="wkStats">
+            <div class="wk-stat"><div class="wk-stat-val" id="wsCount">-</div><div class="wk-stat-lbl">세션</div><div class="wk-stat-delta same" id="wsCountD"></div></div>
+            <div class="wk-stat"><div class="wk-stat-val" id="wsVol">-</div><div class="wk-stat-lbl">볼륨</div><div class="wk-stat-delta same" id="wsVolD"></div></div>
+            <div class="wk-stat"><div class="wk-stat-val" id="wsExs">-</div><div class="wk-stat-lbl">종목</div><div class="wk-stat-delta same" id="wsExsD"></div></div>
+        </div>
+
+        <!-- Exercise Volume Changes -->
+        <div class="sec">
+            <div class="sec-title">종목별 볼륨 <span class="more" onclick="switchTab('tabHistory')">전체 →</span></div>
+            <div id="exList"></div>
+        </div>
+
+        <!-- 2-column: Chart + Body -->
+        <div class="dash-2col">
+            <!-- Volume Chart -->
+            <div class="sec">
+                <div class="sec-title">주간 볼륨</div>
+                <div class="chart-box"><canvas id="chartVol"></canvas></div>
+            </div>
+
+            <!-- Body Metrics Compact -->
+            <div class="sec">
+                <div class="sec-title">체성분 <span class="more" onclick="switchTab('tabBody')">상세 →</span></div>
+                <div class="body-bar" id="bodyBar">
+                    <div><div class="body-weight" id="bbWeight">--<small>kg</small></div></div>
+                    <div class="sep"></div>
+                    <div class="body-mets">
+                        <div class="body-met"><div class="body-met-val" id="bbSM">--</div><div class="body-met-lbl">골격근</div></div>
+                        <div class="body-met"><div class="body-met-val" id="bbBF">--</div><div class="body-met-lbl">체지방률</div></div>
+                        <div class="body-met"><div class="body-met-val" id="bbBMI">--</div><div class="body-met-lbl">BMI</div></div>
+                    </div>
+                </div>
+                <div class="chart-box" style="margin-top:calc(var(--sp)*1.5)"><canvas id="chartBody"></canvas></div>
+            </div>
+        </div>
+
+        <!-- AI Insight -->
+        <div id="dashInsight"></div>
+
+        <!-- Recent Sessions -->
+        <div class="sec">
+            <div class="sec-title">최근 세션 <span class="more" onclick="switchTab('tabHistory')">전체 →</span></div>
+            <div id="recentList"></div>
+        </div>
+    </div>
+
+    <!-- LOG TAB -->
+    <div id="tabLog" class="tab">
+        <div class="sec-title" style="font-size:15px;text-transform:none;letter-spacing:0">📝 세션 기록</div>
+        <div class="log-type-row">
+            <button class="log-type active" data-type="workout" onclick="selectLogType('workout')"><span class="type-ico">🏋️</span>오운동</button>
+            <button class="log-type" data-type="reset" onclick="selectLogType('reset')"><span class="type-ico">🧘</span>더리셋</button>
+        </div>
+        <div class="field-row" style="margin-bottom:14px;">
+            <div class="field" style="flex:1"><label class="field-label">날짜</label><input type="date" id="logDate" class="input"></div>
+            <div class="field" style="width:72px" id="weekGroup"><label class="field-label">주차</label><input type="number" id="logWeek" class="input" placeholder="W"></div>
+            <div class="field" style="width:72px" id="numGroup"><label class="field-label">번호</label><input type="number" id="logNum" class="input" placeholder="#"></div>
+        </div>
+        <div class="field">
+            <label class="field-label">운동 기록</label>
+            <textarea id="quickEntry" class="input textarea" placeholder="벤치프레스: 60x10, 70x8, 80x5
+랫풀다운(N): 35x12, 40x10, 45x8
+플랭크: 60s, 45s
+풀업: 8, 6, 5"></textarea>
+            <div class="hint"><strong>형식:</strong> <code>운동명: 중량x횟수</code> · <code>30s</code> · <code>10, 8, 6</code>(맨몸) · <code>(R/L/N)</code> 양측</div>
+        </div>
+        <div id="parsedPreview"></div>
+        <div class="field"><label class="field-label">메모</label><input type="text" id="logNote" class="input" placeholder="컨디션, 느낀 점 등"></div>
+        <div class="sticky-save"><button class="btn btn-accent save-btn" onclick="saveSession()">💾 세션 저장</button></div>
+    </div>
+
+    <!-- BODY TAB -->
+    <div id="tabBody" class="tab">
+        <div class="sec-title" style="font-size:15px;text-transform:none;letter-spacing:0">📐 체성분</div>
+        <div class="body-hero-tab">
+            <div class="body-big" id="bWeight">--<small>kg</small></div>
+            <div class="body-row">
+                <div class="body-metric"><div class="body-metric-val" id="bSM">--</div><div class="body-metric-lbl">골격근(kg)</div></div>
+                <div class="body-metric"><div class="body-metric-val" id="bBF">--</div><div class="body-metric-lbl">체지방률(%)</div></div>
+                <div class="body-metric"><div class="body-metric-val" id="bBMI">--</div><div class="body-metric-lbl">BMI</div></div>
+            </div>
+        </div>
+        <div class="sec-title" style="font-size:13px;text-transform:none;letter-spacing:0">➕ 체성분 기록</div>
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:20px;">
+            <div class="field"><label class="field-label">날짜</label><input type="date" id="bodyDate" class="input"></div>
+            <div class="body-grid">
+                <div class="field"><label class="field-label">체중(kg)</label><input type="number" step="0.1" id="bwIn" class="input" placeholder="88.0"></div>
+                <div class="field"><label class="field-label">골격근(kg)</label><input type="number" step="0.1" id="smIn" class="input" placeholder="36.3"></div>
+                <div class="field"><label class="field-label">체지방률(%)</label><input type="number" step="0.1" id="bfIn" class="input" placeholder="26.9"></div>
+                <div class="field"><label class="field-label">BMI</label><input type="number" step="0.1" id="bmiIn" class="input" placeholder="27.5"></div>
+                <div class="field"><label class="field-label">체지방량(kg)</label><input type="number" step="0.1" id="bfkgIn" class="input" placeholder="23.7"></div>
+                <div class="field"><label class="field-label">내장지방</label><input type="number" step="1" id="vfIn" class="input" placeholder="9"></div>
+            </div>
+            <button class="btn btn-accent" style="width:100%;margin-top:10px;" onclick="saveBodyMetrics()">💾 저장</button>
+        </div>
+        <div class="sec-title" style="font-size:13px;text-transform:none;letter-spacing:0">📈 체성분 추이</div>
+        <div class="chart-box" style="margin-bottom:20px;"><canvas id="chartBodyDetail"></canvas></div>
+        <div id="bodyHistory"></div>
+    </div>
+
+    <!-- HISTORY TAB -->
+    <div id="tabHistory" class="tab">
+        <div class="sec-title" style="font-size:15px;text-transform:none;letter-spacing:0">📋 세션 이력</div>
+        <div class="chips">
+            <button class="chip active" data-f="all" onclick="filterHistory('all')">전체</button>
+            <button class="chip" data-f="workout" onclick="filterHistory('workout')">오운동</button>
+            <button class="chip" data-f="reset" onclick="filterHistory('reset')">더리셋</button>
+        </div>
+        <div id="historyList"></div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div id="tabSettings" class="tab">
+        <div class="sec-title" style="font-size:15px;text-transform:none;letter-spacing:0">⚙️ 설정</div>
+        <div class="setting-group">
+            <div class="setting-row"><div><div class="setting-name">Claude API 키</div><div class="setting-desc">AI 인사이트</div></div><span id="apiBadge" class="badge badge-no">미설정</span></div>
+            <div class="setting-row" style="flex-direction:column;gap:8px;align-items:stretch;">
+                <input type="password" id="apiKeyInput" class="input" placeholder="sk-ant-api03-..." style="font-size:12px;">
+                <button class="btn btn-sm btn-accent" onclick="saveApiKey()">저장</button>
+            </div>
+        </div>
+        <div class="setting-group">
+            <div class="setting-row"><div><div class="setting-name">계정</div><div class="setting-desc" id="setEmail">-</div></div><button class="btn btn-sm btn-ghost" id="logoutBtn" onclick="doLogout()" style="display:none">로그아웃</button></div>
+        </div>
+        <div class="setting-group">
+            <div class="setting-row"><div class="setting-name">저장</div><div class="setting-desc" id="setStorage">-</div></div>
+            <div class="setting-row"><div class="setting-name">세션</div><div class="setting-desc" id="setSessionN">-</div></div>
+            <div class="setting-row"><div class="setting-name">체성분</div><div class="setting-desc" id="setBodyN">-</div></div>
+        </div>
+        <div class="setting-group">
+            <div class="setting-row" style="justify-content:center;"><button class="btn btn-ghost" onclick="exportData()">📦 내보내기</button></div>
+            <div class="setting-row" style="justify-content:center;"><button class="btn btn-ghost" onclick="importData()">📥 가져오기</button><input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)"></div>
+        </div>
+        <div style="text-align:center;margin-top:40px;color:var(--text3);font-size:11px;">오운동 시리즈 v4.0<br>거대하고 강력한 몸, 완벽한 지배</div>
+    </div>
+
+    <nav class="bottom-nav">
+        <button class="nav-btn active" data-tab="tabDash" onclick="switchTab('tabDash')"><span class="ico">📊</span>대시보드</button>
+        <button class="nav-btn" data-tab="tabLog" onclick="switchTab('tabLog')"><span class="ico">📝</span>기록</button>
+        <button class="nav-btn" data-tab="tabBody" onclick="switchTab('tabBody')"><span class="ico">📐</span>체성분</button>
+        <button class="nav-btn" data-tab="tabHistory" onclick="switchTab('tabHistory')"><span class="ico">📋</span>이력</button>
+        <button class="nav-btn" data-tab="tabSettings" onclick="switchTab('tabSettings')"><span class="ico">⚙️</span>설정</button>
+    </nav>
+</div>
+
+<div id="toast" class="toast"></div>
+<div id="sessionModal" class="modal-bg" onclick="if(event.target===this)closeModal()">
+    <div class="modal"><div class="modal-bar"></div><div class="modal-title" id="modalTitle"></div><div id="modalContent"></div></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+let db=null,currentUser=null,firebaseReady=false,localMode=false;
+let sessions=[],bodyMetrics=[],exerciseNames=new Set();
+let apiKey=localStorage.getItem('fitness_api_key')||'';
+let charts={};
+
+const FIREBASE_CONFIG={apiKey:"AIzaSyBajNhkiq0-V_qTO_k_1BnTANbVKf_R2fk",authDomain:"fitness-eb293.firebaseapp.com",projectId:"fitness-eb293",storageBucket:"fitness-eb293.firebasestorage.app",messagingSenderId:"15447518456",appId:"1:15447518456:web:0db40bb591bd22266e9f0d"};
+
+// ===== INIT =====
+async function init(){
+    if(localStorage.getItem('fitness_local_mode')){localMode=true;initLocal();return;}
+    try{firebase.initializeApp(FIREBASE_CONFIG);db=firebase.firestore();firebaseReady=true;show('loginScreen');firebase.auth().onAuthStateChanged(async u=>{if(u){currentUser=u;await enterApp();}});}catch(e){console.error(e);localMode=true;initLocal();}
+}
+function saveFirebaseConfig(){try{const c=JSON.parse(document.getElementById('firebaseConfigInput').value.trim());localStorage.setItem('fitness_firebase_config',JSON.stringify(c));location.reload();}catch(e){toast('올바른 JSON이 아닙니다');}}
+function useLocalMode(){localStorage.setItem('fitness_local_mode','true');localMode=true;initLocal();}
+function initLocal(){sessions=JSON.parse(localStorage.getItem('fitness_sessions')||'[]');bodyMetrics=JSON.parse(localStorage.getItem('fitness_body')||'[]');buildNames();show('appScreen');setupDefaults();renderDash();updateSettings();}
+async function googleLogin(){if(!firebaseReady)return;try{await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());}catch(e){toast('로그인 실패');}}
+function skipLogin(){localMode=true;localStorage.setItem('fitness_local_mode','true');initLocal();}
+async function enterApp(){
+    show('appScreen');
+    if(currentUser){const av=document.getElementById('userAvatar');if(currentUser.photoURL){av.src=currentUser.photoURL;av.style.display='block';}document.getElementById('logoutBtn').style.display='block';document.getElementById('setEmail').textContent=currentUser.email;}
+    await loadData();await loadUserSettings();setupDefaults();renderDash();updateSettings();
+}
+function doLogout(){firebase.auth().signOut();currentUser=null;sessions=[];bodyMetrics=[];show('loginScreen');}
+
+// ===== DATA =====
+function getUserRef(){return(!currentUser||!firebaseReady)?null:db.collection('users').doc(currentUser.uid);}
+async function loadData(){
+    if(localMode)return;const ref=getUserRef();if(!ref)return;
+    document.getElementById('syncStatus').style.display='inline-block';
+    try{const[ss,bs]=await Promise.all([ref.collection('sessions').orderBy('date','desc').limit(500).get(),ref.collection('body_metrics').orderBy('date','desc').limit(200).get()]);sessions=ss.docs.map(d=>({id:d.id,...d.data()}));bodyMetrics=bs.docs.map(d=>({id:d.id,...d.data()}));buildNames();document.getElementById('syncStatus').style.display='none';}catch(e){console.error(e);}
+}
+function buildNames(){exerciseNames.clear();sessions.forEach(s=>{if(s.exercises)s.exercises.forEach(e=>exerciseNames.add(e.name));});}
+async function saveSess(d){
+    if(localMode){d.id='l_'+Date.now();sessions.unshift(d);localStorage.setItem('fitness_sessions',JSON.stringify(sessions));return d;}
+    const ref=getUserRef();if(!ref)return null;const doc=await ref.collection('sessions').add({...d,createdAt:firebase.firestore.FieldValue.serverTimestamp()});d.id=doc.id;sessions.unshift(d);return d;
+}
+async function saveBody(d){
+    if(localMode){d.id='l_'+Date.now();bodyMetrics.unshift(d);localStorage.setItem('fitness_body',JSON.stringify(bodyMetrics));return d;}
+    const ref=getUserRef();if(!ref)return null;const doc=await ref.collection('body_metrics').add({...d,createdAt:firebase.firestore.FieldValue.serverTimestamp()});d.id=doc.id;bodyMetrics.unshift(d);return d;
+}
+
+// ===== UI =====
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function switchTab(id){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelector(`.nav-btn[data-tab="${id}"]`).classList.add('active');if(id==='tabHistory')renderHistory();if(id==='tabBody')renderBodyTab();if(id==='tabDash')renderDash();}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+function closeModal(){document.getElementById('sessionModal').classList.remove('active');}
+function toLocalDateStr(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+
+// ===== WEEK HELPERS =====
+function getWeekRange(d){const mon=new Date(d);mon.setDate(d.getDate()-(d.getDay()+6)%7);mon.setHours(0,0,0,0);const sun=new Date(mon);sun.setDate(mon.getDate()+6);return{mon,sun};}
+function getWeekNum(d){return Math.ceil(((d-new Date(d.getFullYear(),0,1))/864e5+new Date(d.getFullYear(),0,1).getDay()+1)/7);}
+function weekDateStrs(mon){return Array.from({length:7},(_,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);return toLocalDateStr(d);});}
+function sessionsInDates(dates){return sessions.filter(s=>dates.includes(s.date));}
+
+// ===== DASHBOARD =====
+function renderDash(){
+    const now=new Date();
+    const{mon,sun}=getWeekRange(now);
+    const wn=getWeekNum(now);
+    const thisDates=weekDateStrs(mon);
+    const lastMon=new Date(mon);lastMon.setDate(mon.getDate()-7);
+    const lastDates=weekDateStrs(lastMon);
+    const lastWn=wn-1;
+
+    const thisSess=sessionsInDates(thisDates);
+    const lastSess=sessionsInDates(lastDates);
+
+    // Week hero
+    const m1=mon.getMonth()+1,d1=mon.getDate(),m2=sun.getMonth()+1,d2=sun.getDate();
+    document.getElementById('wkNum').textContent=`WEEK ${wn}`;
+    document.getElementById('wkTitle').textContent=thisSess.length>0?`${thisSess.length}세션 완료`:'아직 기록 없음';
+    document.getElementById('wkRange').textContent=`${m1}월 ${d1}일 — ${m2}월 ${d2}일`;
+
+    // Week dots
+    const days=['월','화','수','목','금','토','일'];
+    const todayStr=toLocalDateStr(now);
+    document.getElementById('wkDots').innerHTML=thisDates.map((ds,i)=>{
+        const done=sessions.some(s=>s.date===ds);
+        const isToday=ds===todayStr;
+        return`<div class="wk-dot${done?' done':''}${isToday?' today':''}"><div class="wk-dot-day">${days[i]}</div><div class="wk-dot-ind"></div></div>`;
+    }).join('');
+
+    // Week stats
+    const thisUniq=new Set();thisSess.forEach(s=>thisUniq.add(s.date));
+    const lastUniq=new Set();lastSess.forEach(s=>lastUniq.add(s.date));
+    const thisVol=thisSess.reduce((s,x)=>s+(x.total_volume||0),0);
+    const lastVol=lastSess.reduce((s,x)=>s+(x.total_volume||0),0);
+    const thisExSet=new Set();thisSess.forEach(s=>{if(s.exercises)s.exercises.forEach(e=>thisExSet.add(e.name));});
+    const lastExSet=new Set();lastSess.forEach(s=>{if(s.exercises)s.exercises.forEach(e=>lastExSet.add(e.name));});
+
+    document.getElementById('wsCount').textContent=thisUniq.size;
+    document.getElementById('wsVol').textContent=thisVol>1000?(thisVol/1000).toFixed(1)+'t':thisVol>0?thisVol+'kg':'–';
+    document.getElementById('wsExs').textContent=thisExSet.size||'–';
+
+    renderDelta('wsCountD',thisUniq.size,lastUniq.size,'일');
+    renderDelta('wsVolD',thisVol,lastVol,'',true);
+    renderDelta('wsExsD',thisExSet.size,lastExSet.size,'종목');
+
+    // Exercise volume comparison
+    renderExList(thisDates,lastDates);
+
+    // Charts
+    renderVolChart();
+    renderBodyCompact();
+    renderBodyChartDash();
+    renderRecentList();
+}
+
+function renderDelta(id,curr,prev,unit,pct){
+    const el=document.getElementById(id);
+    if(!prev&&!curr){el.textContent='';return;}
+    if(!prev){el.className='wk-stat-delta same';el.textContent='전주 없음';return;}
+    const diff=curr-prev;
+    if(pct){
+        const p=Math.round((diff/prev)*100);
+        el.className='wk-stat-delta '+(p>0?'up':p<0?'down':'same');
+        el.textContent=p>0?`+${p}%`:p<0?`${p}%`:'동일';
+    }else{
+        el.className='wk-stat-delta '+(diff>0?'up':diff<0?'down':'same');
+        el.textContent=diff>0?`+${diff}${unit}`:diff<0?`${diff}${unit}`:'동일';
+    }
+}
+
+function renderExList(thisDates,lastDates){
+    const thisVol={},lastVol={},totalCount={};
+    sessions.forEach(s=>{
+        if(!s.exercises)return;
+        const inThis=thisDates.includes(s.date);
+        const inLast=lastDates.includes(s.date);
+        s.exercises.forEach(ex=>{
+            totalCount[ex.name]=(totalCount[ex.name]||0)+1;
+            const vol=ex.total_volume||ex.sets.reduce((sum,st)=>(st.weight_kg&&st.reps)?sum+st.weight_kg*st.reps:sum,0);
+            if(inThis)thisVol[ex.name]=(thisVol[ex.name]||0)+vol;
+            if(inLast)lastVol[ex.name]=(lastVol[ex.name]||0)+vol;
+        });
+    });
+
+    const allEx=new Set([...Object.keys(thisVol),...Object.keys(lastVol)]);
+    const items=[...allEx]
+        .filter(name=>(totalCount[name]||0)>=2&&((thisVol[name]||0)>0||(lastVol[name]||0)>0))
+        .map(name=>{const tw=thisVol[name]||0,lw=lastVol[name]||0;const delta=lw>0?((tw-lw)/lw*100):tw>0?100:0;return{name,tw,lw,delta};})
+        .sort((a,b)=>b.tw-a.tw).slice(0,8);
+
+    document.getElementById('exList').innerHTML=items.length?items.map(i=>{
+        let cls='same',txt='–';
+        if(i.lw===0&&i.tw>0){cls='new';txt='NEW';}
+        else if(i.tw>i.lw){cls='up';txt=`+${Math.round(i.delta)}%`;}
+        else if(i.tw<i.lw){cls='down';txt=`${Math.round(i.delta)}%`;}
+        const twStr=i.tw>0?(i.tw>=1000?(i.tw/1000).toFixed(1)+'t':i.tw+'kg'):'–';
+        return`<div class="ex-row"><div class="ex-name">${i.name}</div><div class="ex-vals"><div class="ex-vol">${twStr}</div><div class="ex-delta ${cls}">${txt}</div></div></div>`;
+    }).join(''):'<div style="color:var(--text3);font-size:12px;padding:16px 0;text-align:center">이번 주 기록 없음</div>';
+}
+
+function renderVolChart(){
+    const sorted=[...sessions].sort((a,b)=>a.date>b.date?1:-1);
+    const wv={};
+    sorted.forEach(s=>{if(!s.date||!s.total_volume)return;const d=new Date(s.date);const wk=new Date(d);wk.setDate(d.getDate()-((d.getDay()+6)%7));const k=toLocalDateStr(wk);wv[k]=(wv[k]||0)+s.total_volume;});
+    const labels=Object.keys(wv).sort().slice(-10);
+    const data=labels.map(l=>wv[l]);
+
+    if(charts.vol)charts.vol.destroy();
+    charts.vol=new Chart(document.getElementById('chartVol'),{
+        type:'bar',data:{labels:labels.map(l=>'W'+getWeekNum(new Date(l))),datasets:[{data,backgroundColor:'#d4a05240',borderColor:'#d4a052',borderWidth:1,borderRadius:6,barThickness:16}]},
+        options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#151515'},ticks:{color:'#444',font:{size:9},callback:v=>v>1000?(v/1000).toFixed(0)+'k':v}},x:{grid:{display:false},ticks:{color:'#444',font:{size:9}}}}}
+    });
+}
+
+function renderBodyCompact(){
+    const sb=[...bodyMetrics].sort((a,b)=>a.date>b.date?-1:1);
+    if(!sb.length)return;
+    const l=sb[0];
+    document.getElementById('bbWeight').innerHTML=`${l.weight_kg}<small>kg</small>`;
+    document.getElementById('bbSM').textContent=l.skeletal_muscle_kg?l.skeletal_muscle_kg+'kg':'–';
+    document.getElementById('bbBF').textContent=l.body_fat_pct?l.body_fat_pct+'%':'–';
+    document.getElementById('bbBMI').textContent=l.bmi||'–';
+}
+
+function renderBodyChartDash(){
+    const s=[...bodyMetrics].filter(m=>m.weight_kg).sort((a,b)=>a.date>b.date?1:-1);
+    if(s.length<2)return;
+    if(charts.bodyDash)charts.bodyDash.destroy();
+
+    const hasDetail=s.some(m=>m.skeletal_muscle_kg&&m.body_fat_pct);
+    if(!hasDetail){
+        // Weight only
+        charts.bodyDash=new Chart(document.getElementById('chartBody'),{
+            type:'line',data:{labels:s.map(m=>m.date.slice(2,7)),datasets:[{label:'체중',data:s.map(m=>m.weight_kg),borderColor:'#d4a052',backgroundColor:'#d4a05210',fill:true,tension:.3,borderWidth:2,pointRadius:3,pointBackgroundColor:'#d4a052'}]},
+            options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#151515'},ticks:{color:'#444',font:{size:9},callback:v=>v+'kg'}},x:{grid:{display:false},ticks:{color:'#333',font:{size:8},maxRotation:0}}}}
+        });
+        return;
+    }
+
+    const wMin=Math.floor(Math.min(...s.map(m=>m.weight_kg))-3);
+    const wMax=Math.ceil(Math.max(...s.map(m=>m.weight_kg))+3);
+    const bfs=s.filter(m=>m.body_fat_pct);
+    const bfMin=bfs.length?Math.floor(Math.min(...bfs.map(m=>m.body_fat_pct))-2):10;
+    const bfMax=bfs.length?Math.ceil(Math.max(...bfs.map(m=>m.body_fat_pct))+2):35;
+
+    charts.bodyDash=new Chart(document.getElementById('chartBody'),{
+        type:'line',data:{labels:s.map(m=>m.date.slice(2,7)),datasets:[
+            {label:'체중',data:s.map(m=>m.weight_kg),borderColor:'#d4a052',fill:false,tension:.3,borderWidth:2,pointRadius:2.5,pointBackgroundColor:'#d4a052',yAxisID:'y'},
+            {label:'골격근',data:s.map(m=>m.skeletal_muscle_kg),borderColor:'#4ade80',fill:false,tension:.3,borderWidth:1.5,pointRadius:2,pointBackgroundColor:'#4ade80',yAxisID:'y'},
+            {label:'체지방률',data:s.map(m=>m.body_fat_pct),borderColor:'#f87171',fill:false,tension:.3,borderWidth:1.5,borderDash:[4,3],pointRadius:2,pointBackgroundColor:'#f87171',yAxisID:'y1'}
+        ]},options:{responsive:true,interaction:{intersect:false,mode:'index'},plugins:{
+            legend:{position:'bottom',labels:{color:'#666',font:{size:9},usePointStyle:true,pointStyle:'circle',padding:12,boxWidth:6}},
+            tooltip:{backgroundColor:'#111',titleColor:'#f0f0f0',bodyColor:'#aaa',borderColor:'#222',borderWidth:1,padding:8,callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y+(ctx.datasetIndex===2?'%':'kg')}}
+        },scales:{
+            y:{position:'left',min:wMin,max:wMax,grid:{color:'#151515'},ticks:{color:'#555',font:{size:8},callback:v=>v+'kg'}},
+            y1:{position:'right',min:bfMin,max:bfMax,grid:{display:false},ticks:{color:'#f87171',font:{size:8},callback:v=>v+'%'}},
+            x:{grid:{display:false},ticks:{color:'#333',font:{size:8},maxRotation:0}}
+        }}
+    });
+}
+
+function renderRecentList(){
+    const recent=[...sessions].sort((a,b)=>{if(a.date===b.date)return(b.session_number||0)-(a.session_number||0);return a.date>b.date?-1:1;}).slice(0,5);
+    document.getElementById('recentList').innerHTML=recent.map(s=>{
+        const exs=(s.exercises||[]).map(e=>e.name).join(', ');
+        const tc=s.session_type==='workout'?'w':'r';
+        const lbl=s.label||(s.session_type==='workout'?`오운동-${s.session_number}`:'더리셋');
+        const vol=s.total_volume?`${s.total_volume.toLocaleString()}kg`:'';
+        return`<div class="s-item" onclick="showDetail('${s.id}')"><div class="s-row"><span class="s-label ${tc}">${lbl}</span><span class="s-date">${s.date} ${s.day_label||''}</span></div><div class="s-exs">${exs||'기록 없음'}</div>${vol?`<div class="s-vol">${vol}</div>`:''}</div>`;
+    }).join('')||'<div style="color:var(--text3);text-align:center;padding:32px;font-size:12px">기록 없음</div>';
+}
+
+// ===== LOGGING =====
+let logType='workout';
+function selectLogType(t){logType=t;document.querySelectorAll('.log-type').forEach(b=>b.classList.toggle('active',b.dataset.type===t));document.getElementById('numGroup').style.display=t==='reset'?'none':'block';}
+function setupDefaults(){
+    const now=new Date();
+    document.getElementById('logDate').value=toLocalDateStr(now);
+    document.getElementById('bodyDate').value=toLocalDateStr(now);
+    document.getElementById('logWeek').value=getWeekNum(now);
+    const mx=sessions.filter(s=>s.session_type==='workout').reduce((m,s)=>Math.max(m,s.session_number||0),0);
+    document.getElementById('logNum').value=mx+1;
+    document.getElementById('quickEntry').addEventListener('input',updatePreview);
+}
+
+function parseText(text){
+    const lines=text.trim().split('\n').filter(l=>l.trim());const exs=[];
+    for(const line of lines){
+        const m=line.match(/^(.+?):\s*(.+)$/);if(!m)continue;
+        const name=m[1].trim(),raw=m[2].split(',').map(s=>s.trim()).filter(Boolean);
+        const sets=[];let vol=0;
+        for(const r of raw){
+            let x=r.match(/^(\d+\.?\d*)\s*(?:kg)?\s*[xX×]\s*(\d+)$/);
+            if(x){const w=parseFloat(x[1]),rr=parseInt(x[2]);sets.push({weight_kg:w,reps:rr});vol+=w*rr;continue;}
+            x=r.match(/^(\d+\.?\d*)\s*s$/i);if(x){sets.push({duration_sec:parseFloat(x[1])});continue;}
+            x=r.match(/^(\d+)m(?:(\d+)s)?$/i);if(x){sets.push({duration_sec:parseInt(x[1])*60+(parseInt(x[2])||0)});continue;}
+            x=r.match(/^(\d+)$/);if(x){sets.push({reps:parseInt(x[1])});continue;}
+        }
+        exs.push({name,sets,total_volume:vol});
+    }
+    return exs;
+}
+function updatePreview(){
+    const exs=parseText(document.getElementById('quickEntry').value);
+    if(!exs.length){document.getElementById('parsedPreview').innerHTML='';return;}
+    const tv=exs.reduce((s,e)=>s+e.total_volume,0);
+    document.getElementById('parsedPreview').innerHTML=`<div class="preview"><div style="font-size:11px;color:var(--text3);margin-bottom:6px;">미리보기 · 볼륨 <strong style="color:var(--accent)">${tv.toLocaleString()}kg</strong></div>${exs.map(e=>{const ss=e.sets.map(s=>s.weight_kg&&s.reps?`${s.weight_kg}×${s.reps}`:s.duration_sec?s.duration_sec+'s':s.reps?s.reps+'회':'?').join(', ');return`<div class="preview-ex"><span class="preview-name">${e.name}</span> <span class="preview-sets">— ${ss}${e.total_volume?` (${e.total_volume}kg)`:''}</span></div>`;}).join('')}</div>`;
+}
+
+async function saveSession(){
+    const date=document.getElementById('logDate').value,wk=parseInt(document.getElementById('logWeek').value),num=parseInt(document.getElementById('logNum').value),note=document.getElementById('logNote').value.trim(),text=document.getElementById('quickEntry').value.trim();
+    if(!date){toast('날짜 입력');return;}
+    const exs=parseText(text),vol=exs.reduce((s,e)=>s+e.total_volume,0);
+    const days=['일','월','화','수','목','금','토'];
+    const d={date,week:wk||null,session_number:logType==='workout'?(num||null):null,session_type:logType,label:logType==='workout'?`오운동-${num}`:'더리셋',day_label:days[new Date(date).getDay()]+'요일',exercises:exs,total_volume:vol,note:note||null};
+    try{await saveSess(d);buildNames();toast('✅ 저장 완료!');document.getElementById('quickEntry').value='';document.getElementById('logNote').value='';document.getElementById('parsedPreview').innerHTML='';if(logType==='workout')document.getElementById('logNum').value=(num||0)+1;}catch(e){toast('실패: '+e.message);}
+}
+
+// ===== BODY =====
+function renderBodyTab(){
+    const s=[...bodyMetrics].sort((a,b)=>a.date>b.date?-1:1);
+    if(s.length>0){const l=s[0];document.getElementById('bWeight').innerHTML=`${l.weight_kg}<small>kg</small>`;document.getElementById('bSM').textContent=l.skeletal_muscle_kg||'--';document.getElementById('bBF').textContent=l.body_fat_pct?l.body_fat_pct+'%':'--';document.getElementById('bBMI').textContent=l.bmi||'--';}
+    const cs=[...bodyMetrics].sort((a,b)=>a.date>b.date?1:-1);
+    if(cs.length>=2){
+        if(charts.bodyDetail)charts.bodyDetail.destroy();
+        charts.bodyDetail=new Chart(document.getElementById('chartBodyDetail'),{type:'line',data:{labels:cs.map(m=>m.date.slice(5)),datasets:[{label:'체중',data:cs.map(m=>m.weight_kg),borderColor:'#d4a052',tension:.3,yAxisID:'y'},{label:'골격근',data:cs.map(m=>m.skeletal_muscle_kg),borderColor:'#4ade80',tension:.3,yAxisID:'y'},{label:'체지방률',data:cs.map(m=>m.body_fat_pct),borderColor:'#f87171',tension:.3,yAxisID:'y1'}]},options:{responsive:true,plugins:{legend:{labels:{color:'#666',font:{size:10}}}},scales:{y:{position:'left',grid:{color:'#151515'},ticks:{color:'#444'}},y1:{position:'right',grid:{display:false},ticks:{color:'#444',callback:v=>v+'%'}},x:{grid:{display:false},ticks:{color:'#444',font:{size:9},maxRotation:45}}}}});
+    }
+    document.getElementById('bodyHistory').innerHTML=s.slice(0,20).map(m=>`<div class="s-item"><div class="s-row"><span class="s-label">${m.date}</span><span style="font-weight:700">${m.weight_kg}kg</span></div><div class="s-exs">골격근 ${m.skeletal_muscle_kg||'-'}kg · 체지방률 ${m.body_fat_pct||'-'}% · BMI ${m.bmi||'-'}${m.body_fat_kg?` · 체지방량 ${m.body_fat_kg}kg`:''}${m.visceral_fat?` · 내장지방 ${m.visceral_fat}`:''}</div></div>`).join('');
+}
+async function saveBodyMetrics(){
+    const d={date:document.getElementById('bodyDate').value,weight_kg:parseFloat(document.getElementById('bwIn').value),skeletal_muscle_kg:parseFloat(document.getElementById('smIn').value)||null,body_fat_pct:parseFloat(document.getElementById('bfIn').value)||null,bmi:parseFloat(document.getElementById('bmiIn').value)||null,body_fat_kg:parseFloat(document.getElementById('bfkgIn').value)||null,visceral_fat:parseInt(document.getElementById('vfIn').value)||null};
+    if(!d.date||!d.weight_kg){toast('날짜와 체중 필수');return;}
+    try{await saveBody(d);toast('✅ 체성분 저장!');['bwIn','smIn','bfIn','bmiIn','bfkgIn','vfIn'].forEach(id=>document.getElementById(id).value='');renderBodyTab();}catch(e){toast('실패');}
+}
+
+// ===== HISTORY =====
+let hFilter='all';
+function filterHistory(f){hFilter=f;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c.dataset.f===f));renderHistory();}
+function renderHistory(){
+    let f=[...sessions];if(hFilter!=='all')f=f.filter(s=>s.session_type===hFilter);
+    f.sort((a,b)=>{if(a.date===b.date)return(b.session_number||0)-(a.session_number||0);return a.date>b.date?-1:1;});
+    document.getElementById('historyList').innerHTML=f.map(s=>{const exs=(s.exercises||[]).map(e=>e.name).join(', ');const tc=s.session_type==='workout'?'w':'r';const lbl=s.label||(s.session_type==='workout'?`오운동-${s.session_number}`:'더리셋');const vol=s.total_volume?`${s.total_volume.toLocaleString()}kg`:'';return`<div class="s-item" onclick="showDetail('${s.id}')"><div class="s-row"><span class="s-label ${tc}">${lbl}</span><span class="s-date">${s.date} ${s.day_label||''}</span></div><div class="s-exs">${exs||s.note||'기록 없음'}</div>${vol?`<div class="s-vol">${vol}</div>`:''}</div>`;}).join('')||'<div style="color:var(--text3);text-align:center;padding:40px;font-size:12px">기록 없음</div>';
+}
+
+function showDetail(id){
+    const s=sessions.find(x=>x.id===id);if(!s)return;
+    document.getElementById('modalTitle').textContent=`${s.label||s.session_type} — ${s.date}`;
+    let c='';
+    if(s.exercises&&s.exercises.length){c+=s.exercises.map(ex=>{const ss=ex.sets.map(st=>st.weight_kg&&st.reps?`${st.weight_kg}kg×${st.reps}`:st.duration_sec?st.duration_sec+'초':st.reps?st.reps+'회':'-').join(' → ');return`<div style="margin-bottom:12px"><div style="font-weight:600;color:var(--accent);font-size:13px">${ex.name}</div><div style="font-size:12px;color:var(--text2);margin-top:4px">${ss}</div>${ex.total_volume?`<div style="font-size:11px;color:var(--text3)">볼륨 ${ex.total_volume}kg</div>`:''}</div>`;}).join('');}
+    if(s.note)c+=`<div style="margin-top:12px;padding:10px;background:var(--surface2);border-radius:8px;font-size:12px;color:var(--text2)">📝 ${s.note}</div>`;
+    if(s.total_volume)c+=`<div style="margin-top:12px;font-size:14px;font-weight:700;color:var(--accent)">총 볼륨 ${s.total_volume.toLocaleString()}kg</div>`;
+    c+=`<button class="btn btn-accent" style="width:100%;margin-top:16px" onclick="genInsight(sessions.find(x=>x.id==='${id}'))">🤖 AI 인사이트</button><div id="modalInsight" style="margin-top:12px"></div>`;
+    document.getElementById('modalContent').innerHTML=c;
+    document.getElementById('sessionModal').classList.add('active');
+}
+
+// ===== AI =====
+async function genInsight(session){
+    if(!apiKey){toast('API 키를 먼저 설정하세요');return;}
+    const t=document.getElementById('modalInsight')||document.getElementById('dashInsight');
+    t.innerHTML='<div class="insight-loading"><div class="spinner"></div> AI 분석 중...</div>';
+    const recent=sessions.filter(s=>s.session_type==='workout').slice(0,10);
+    const lb=[...bodyMetrics].sort((a,b)=>a.date>b.date?-1:1)[0];
+    const prompt=`당신은 운동 AI 코치. 비전: "거대하고 강력한 완성형 운동선수" (오타니/마카체프 웰터급)\n목표: 골격근40kg+, 체지방률15%이하\n\n이번 세션:\n${JSON.stringify(session)}\n\n체성분: ${lb?`${lb.weight_kg}kg, 골격근${lb.skeletal_muscle_kg}kg, 체지방률${lb.body_fat_pct}%`:'없음'}\n\n최근10세션:\n${recent.map(s=>`${s.date} ${s.label}: ${(s.exercises||[]).map(e=>e.name).join(',')} 볼륨:${s.total_volume||0}kg`).join('\n')}\n\n한국어로 간결하게:\n1.세션 평가\n2.PR/주목점\n3.다음 제안\n4.비전 대비 위치`;
+    try{
+        const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,messages:[{role:'user',content:prompt}]})});
+        const d=await r.json();
+        t.innerHTML=d.content&&d.content[0]?`<div class="insight"><h3>🤖 AI 인사이트</h3><p>${d.content[0].text}</p></div>`:`<div class="insight"><h3>오류</h3><p>${JSON.stringify(d.error||d)}</p></div>`;
+    }catch(e){t.innerHTML=`<div class="insight"><h3>오류</h3><p>${e.message}</p></div>`;}
+}
+
+// ===== SETTINGS =====
+async function loadUserSettings(){if(!localMode&&currentUser){try{const d=await getUserRef().get();if(d.exists&&d.data().apiKey){apiKey=d.data().apiKey;localStorage.setItem('fitness_api_key',apiKey);}}catch(e){}}}
+async function saveApiKey(){
+    apiKey=document.getElementById('apiKeyInput').value.trim();localStorage.setItem('fitness_api_key',apiKey);
+    if(!localMode&&currentUser){try{await getUserRef().set({apiKey},{merge:true});}catch(e){}}
+    updateApiStatus();toast('API 키 저장됨');
+}
+function updateApiStatus(){const b=document.getElementById('apiBadge');if(apiKey){b.className='badge badge-ok';b.textContent='✓ 설정됨';}else{b.className='badge badge-no';b.textContent='미설정';}}
+function updateSettings(){updateApiStatus();if(apiKey)document.getElementById('apiKeyInput').value=apiKey;document.getElementById('setStorage').textContent=localMode?'로컬':'Firebase';document.getElementById('setSessionN').textContent=sessions.length+'건';document.getElementById('setBodyN').textContent=bodyMetrics.length+'건';}
+function showSettings(){switchTab('tabSettings');}
+
+function exportData(){const d={sessions,bodyMetrics,exportDate:new Date().toISOString()};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`오운동_${toLocalDateStr(new Date())}.json`;a.click();}
+function importData(){document.getElementById('importFile').click();}
+async function handleImport(e){
+    const f=e.target.files[0];if(!f)return;const t=await f.text();
+    try{
+        const d=JSON.parse(t);let sn=0,bn=0,err=0;
+        if(d.sessions){for(const s of d.sessions){try{await saveSess(s);sn++;}catch(ex){err++;}}}
+        if(d.bodyMetrics){for(const m of d.bodyMetrics){try{await saveBody(m);bn++;}catch(ex){err++;}}}
+        toast(err>0?`⚠️ ${sn}세션+${bn}체성분, ${err}건 실패`:`✅ ${sn}세션 + ${bn}체성분 완료`);
+        renderDash();updateSettings();
+    }catch(e){toast('실패: '+e.message);}
+    e.target.value='';
+}
+
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(console.error);
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오운동 시리즈</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <style>
+        :root {
+            --bg: #0f0f0f;
+            --card: #1a1a1a;
+            --card-border: #2a2a2a;
+            --text: #e0e0e0;
+            --text-dim: #888;
+            --accent: #f59e0b;
+            --accent2: #3b82f6;
+            --accent3: #10b981;
+            --danger: #ef4444;
+            --purple: #8b5cf6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg); color: var(--text);
+            line-height: 1.5; padding: 20px;
+            max-width: 1200px; margin: 0 auto;
+        }
+        h1 { font-size: 1.5rem; margin-bottom: 4px; }
+        .subtitle { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 24px; }
+
+        /* Stats Row */
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
+        .stat-card {
+            background: var(--card); border: 1px solid var(--card-border);
+            border-radius: 12px; padding: 16px;
+        }
+        .stat-card .label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+        .stat-card .value { font-size: 1.6rem; font-weight: 700; margin-top: 4px; }
+        .stat-card .sub { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
+
+        /* Cards */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+        .card {
+            background: var(--card); border: 1px solid var(--card-border);
+            border-radius: 12px; padding: 20px;
+        }
+        .card h2 { font-size: 1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .card.full { grid-column: 1 / -1; }
+
+        /* Chart */
+        .chart-container { position: relative; height: 240px; }
+
+        /* Table */
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { text-align: left; color: var(--text-dim); font-weight: 500; padding: 8px 12px; border-bottom: 1px solid var(--card-border); }
+        td { padding: 8px 12px; border-bottom: 1px solid #222; }
+        tr:hover { background: #222; }
+        .tag {
+            display: inline-block; padding: 2px 8px; border-radius: 4px;
+            font-size: 0.75rem; font-weight: 600;
+        }
+        .tag-workout { background: #f59e0b22; color: var(--accent); }
+        .tag-reset { background: #8b5cf622; color: var(--purple); }
+        .volume { color: var(--accent); font-weight: 600; }
+
+        /* Insight */
+        .insight-box {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 1px solid #2a3a5e; border-radius: 12px;
+            padding: 20px; margin-bottom: 24px;
+        }
+        .insight-box h2 { color: var(--accent); }
+        .insight-item { padding: 4px 0; }
+        .pr-badge { color: var(--accent); font-weight: 700; }
+        .rec-item { color: var(--accent3); }
+        .warn-item { color: var(--danger); }
+
+        /* Exercise list */
+        .ex-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .ex-chip {
+            background: #252525; border: 1px solid #333; border-radius: 8px;
+            padding: 6px 12px; font-size: 0.8rem;
+        }
+        .ex-chip .vol { color: var(--accent); margin-left: 4px; font-weight: 600; }
+
+        /* Period selector */
+        .period-bar { display: flex; gap: 8px; margin-bottom: 20px; }
+        .period-btn {
+            background: var(--card); border: 1px solid var(--card-border);
+            color: var(--text); padding: 6px 16px; border-radius: 8px;
+            cursor: pointer; font-size: 0.85rem; text-decoration: none;
+        }
+        .period-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <h1>오운동 시리즈</h1>
+    <p class="subtitle">{{ today.isoformat() }} 기준 &mdash; 최근 {{ days }}일</p>
+
+    <div class="period-bar">
+        <a class="period-btn {% if days == 30 %}active{% endif %}" href="/?days=30">30일</a>
+        <a class="period-btn {% if days == 60 %}active{% endif %}" href="/?days=60">60일</a>
+        <a class="period-btn {% if days == 90 %}active{% endif %}" href="/?days=90">90일</a>
+        <a class="period-btn {% if days == 180 %}active{% endif %}" href="/?days=180">180일</a>
+        <a class="period-btn {% if days >= 999 %}active{% endif %}" href="/?days=9999">전체</a>
+    </div>
+
+    <!-- Summary Stats -->
+    <div class="stats">
+        <div class="stat-card">
+            <div class="label">총 세션</div>
+            <div class="value">{{ total_sessions }}</div>
+            <div class="sub">오운동 {{ workout_count }} + 더리셋 {{ reset_count }}</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">총 볼륨</div>
+            <div class="value" style="color: var(--accent);">{{ "{:,.0f}".format(total_volume) }}<span style="font-size:0.8rem">kg</span></div>
+            <div class="sub">주평균 {{ "{:,.0f}".format(total_volume / (days / 7)) }}kg</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">주평균 횟수</div>
+            <div class="value">{{ "%.1f"|format(total_sessions / (days / 7)) }}</div>
+            <div class="sub">회/주</div>
+        </div>
+        {% if body_weights %}
+        <div class="stat-card">
+            <div class="label">체중</div>
+            <div class="value">{{ body_weights[-1] }}<span style="font-size:0.8rem">kg</span></div>
+            {% if body_weights|length >= 2 %}
+            {% set diff = body_weights[-1] - body_weights[0] %}
+            <div class="sub" style="color: {% if diff > 0 %}var(--accent){% elif diff < 0 %}var(--accent3){% endif %}">
+                {{ "%+.1f"|format(diff) }}kg
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Weekly Insight -->
+    {% if weekly_insight %}
+    <div class="insight-box">
+        <h2>이번 주 인사이트</h2>
+        {% for h in weekly_insight.highlights %}
+        <div class="insight-item">{{ h }}</div>
+        {% endfor %}
+        {% if prs %}
+        <div style="margin-top: 8px;">
+            {% for pr in prs %}
+            <div class="insight-item pr-badge">
+                {% if pr.record_type == "1rm" %}
+                {{ pr.exercise_name }} 1RM: {{ "%.1f"|format(pr.previous_best) }} → {{ "%.1f"|format(pr.new_value) }}kg (+{{ "%.1f"|format(pr.improvement) }}kg)
+                {% elif pr.record_type == "max_volume" %}
+                {{ pr.exercise_name }} 볼륨 신기록: {{ "{:,.0f}".format(pr.new_value) }}kg
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% for r in weekly_insight.recommendations %}
+        <div class="insight-item rec-item" style="margin-top: 8px;">{{ r }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Charts Row -->
+    <div class="grid">
+        <div class="card">
+            <h2>📊 주간 볼륨 추이</h2>
+            <div class="chart-container">
+                <canvas id="volumeChart"></canvas>
+            </div>
+        </div>
+        <div class="card">
+            <h2>🥧 근육군 비율</h2>
+            <div class="chart-container">
+                <canvas id="muscleChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1RM Trends -->
+    {% if exercise_trends %}
+    <div class="card full" style="margin-bottom: 24px;">
+        <h2>📈 운동별 1RM 추이</h2>
+        <div class="chart-container" style="height: 280px;">
+            <canvas id="trendChart"></canvas>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Body Composition -->
+    {% if body_dates %}
+    <div class="card full" style="margin-bottom: 24px;">
+        <h2>🏋️ 체성분 추이</h2>
+        <div class="chart-container">
+            <canvas id="bodyChart"></canvas>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Recent Sessions Table -->
+    <div class="card full" style="margin-bottom: 24px;">
+        <h2>📋 최근 세션</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>날짜</th>
+                    <th>세션</th>
+                    <th>운동</th>
+                    <th>볼륨</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in recent_sessions %}
+                <tr>
+                    <td>{{ s.date.isoformat() }} ({{ s.day_label }})</td>
+                    <td>
+                        {% if s.session_type.value == "workout" %}
+                        <span class="tag tag-workout">{{ s.label }}</span>
+                        {% else %}
+                        <span class="tag tag-reset">{{ s.label }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% for ex in s.exercises %}
+                        {{ ex.name }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="volume">
+                        {% if s.total_volume > 0 %}
+                        {{ "{:,.0f}".format(s.total_volume) }}kg
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Top Exercises -->
+    <div class="card full">
+        <h2>🔝 주요 운동 (볼륨 기준)</h2>
+        <div class="ex-list">
+            {% for name, vol in top_exercises %}
+            <div class="ex-chip">{{ name }}<span class="vol">{{ "{:,.0f}".format(vol) }}kg</span></div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+    const chartDefaults = {
+        color: '#888',
+        borderColor: '#333',
+    };
+    Chart.defaults.color = '#888';
+    Chart.defaults.borderColor = '#2a2a2a';
+
+    // Volume Chart
+    new Chart(document.getElementById('volumeChart'), {
+        type: 'bar',
+        data: {
+            labels: {{ chart_labels | tojson }},
+            datasets: [{
+                label: '볼륨 (kg)',
+                data: {{ chart_volumes | tojson }},
+                backgroundColor: '#f59e0b44',
+                borderColor: '#f59e0b',
+                borderWidth: 1,
+                borderRadius: 4,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#222' },
+                    ticks: { callback: v => (v/1000).toFixed(0) + 'k' }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Muscle Group Chart
+    new Chart(document.getElementById('muscleChart'), {
+        type: 'doughnut',
+        data: {
+            labels: {{ muscle_labels | tojson }},
+            datasets: [{
+                data: {{ muscle_values | tojson }},
+                backgroundColor: ['#f59e0b', '#3b82f6', '#10b981', '#8b5cf6', '#6b7280'],
+                borderWidth: 0,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'right', labels: { padding: 16 } },
+            }
+        }
+    });
+
+    // 1RM Trend Chart
+    {% if exercise_trends %}
+    const trendColors = ['#f59e0b', '#3b82f6', '#10b981', '#ef4444', '#8b5cf6', '#ec4899'];
+    const trendDatasets = [];
+    let i = 0;
+    {% for name, data in exercise_trends.items() %}
+    trendDatasets.push({
+        label: '{{ name }}',
+        data: {{ data.dates | tojson }}.map((d, j) => ({x: d, y: {{ data.e1rms | tojson }}[j]})),
+        borderColor: trendColors[i % trendColors.length],
+        backgroundColor: trendColors[i % trendColors.length] + '22',
+        borderWidth: 2, pointRadius: 3, tension: 0.3, fill: false,
+    });
+    i++;
+    {% endfor %}
+    new Chart(document.getElementById('trendChart'), {
+        type: 'line',
+        data: { datasets: trendDatasets },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'top' } },
+            scales: {
+                x: { type: 'category', grid: { display: false } },
+                y: { title: { display: true, text: '추정 1RM (kg)' }, grid: { color: '#222' } }
+            }
+        }
+    });
+    {% endif %}
+
+    // Body Composition Chart
+    {% if body_dates %}
+    new Chart(document.getElementById('bodyChart'), {
+        type: 'line',
+        data: {
+            labels: {{ body_dates | tojson }},
+            datasets: [
+                {
+                    label: '체중 (kg)',
+                    data: {{ body_weights | tojson }},
+                    borderColor: '#3b82f6', backgroundColor: '#3b82f622',
+                    borderWidth: 2, pointRadius: 4, tension: 0.3,
+                    yAxisID: 'y',
+                },
+                {
+                    label: '골격근량 (kg)',
+                    data: {{ body_muscle | tojson }},
+                    borderColor: '#10b981', backgroundColor: '#10b98122',
+                    borderWidth: 2, pointRadius: 4, tension: 0.3,
+                    yAxisID: 'y',
+                },
+                {
+                    label: '체지방률 (%)',
+                    data: {{ body_fat | tojson }},
+                    borderColor: '#ef4444', backgroundColor: '#ef444422',
+                    borderWidth: 2, pointRadius: 4, tension: 0.3,
+                    yAxisID: 'y1',
+                }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'top' } },
+            scales: {
+                y: { position: 'left', title: { display: true, text: 'kg' }, grid: { color: '#222' } },
+                y1: { position: 'right', title: { display: true, text: '%' }, grid: { display: false } },
+                x: { grid: { display: false }, ticks: { maxTicksLimit: 10 } }
+            }
+        }
+    });
+    {% endif %}
+    </script>
+</body>
+</html>
