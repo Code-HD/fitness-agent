@@ -22,8 +22,11 @@ from core.models import (
     BodyMetrics,
     Exercise,
     ExerciseSet,
+    Meal,
+    NutritionTarget,
     Session,
     SessionType,
+    SleepLog,
     WeeklyPlan,
     parse_sets,
 )
@@ -37,6 +40,21 @@ from core.insight_engine import (
 )
 from core.inbody_parser import parse_inbody_screenshot
 from core.firestore_sync import sync_session, sync_body_metrics
+
+# Coach modules
+from core.coaches.nutrition import (
+    aggregate_daily_nutrition,
+    analyze_nutrition_trend,
+    analyze_vs_target,
+    estimate_macros,
+    render_daily_summary,
+)
+from core.coaches.recovery import (
+    analyze_sleep_trend,
+    assess_recovery_readiness,
+    calculate_fatigue_score,
+    render_recovery_score,
+)
 
 mcp = FastMCP(
     "오운동 시리즈",
@@ -669,6 +687,356 @@ def body_history(days: int = 90) -> str:
                 f"체지방: {bf_records[0].body_fat_pct}% → "
                 f"{bf_records[-1].body_fat_pct}% ({bf_sign}{bf_diff:.1f}%)"
             )
+
+    return "\n".join(lines)
+
+
+# ─── 영양 코치 도구 ───
+
+
+@mcp.tool()
+def log_meal(
+    meal_type: str,
+    description: str,
+    date_str: str | None = None,
+    calories: float | None = None,
+    protein_g: float | None = None,
+    carbs_g: float | None = None,
+    fat_g: float | None = None,
+    note: str = "",
+) -> str:
+    """식사 기록 + AI 매크로 추정.
+
+    Args:
+        meal_type: 식사 유형 (아침/점심/저녁/간식/운동전/운동후)
+        description: 음식 설명 ("닭가슴살 200g + 현미밥 1공기")
+        date_str: 날짜 (YYYY-MM-DD, 기본: 오늘)
+        calories: 칼로리 (직접 입력 시)
+        protein_g: 단백질 (직접 입력 시)
+        carbs_g: 탄수화물 (직접 입력 시)
+        fat_g: 지방 (직접 입력 시)
+        note: 메모
+    """
+    adapter = get_adapter()
+    d = date_str or date.today().isoformat()
+
+    # AI 매크로 추정 (값이 없는 경우)
+    if calories is None:
+        estimated = estimate_macros(description)
+        calories = estimated.get("calories")
+        protein_g = protein_g or estimated.get("protein_g")
+        carbs_g = carbs_g or estimated.get("carbs_g")
+        fat_g = fat_g or estimated.get("fat_g")
+
+    meal = Meal(
+        date=d, meal_type=meal_type, description=description,
+        calories=calories, protein_g=protein_g, carbs_g=carbs_g,
+        fat_g=fat_g, note=note,
+    )
+    mid = adapter.save_meal(meal)
+
+    lines = [f"✓ {meal_type} 기록 | {d}"]
+    lines.append(f"  {description}")
+    if calories:
+        lines.append(f"  {calories:.0f}kcal | P:{protein_g or 0:.0f}g C:{carbs_g or 0:.0f}g F:{fat_g or 0:.0f}g")
+
+    # 일일 현황
+    day_meals = adapter.get_meals(
+        start_date=date.fromisoformat(d),
+        end_date=date.fromisoformat(d),
+    )
+    if day_meals:
+        daily = aggregate_daily_nutrition(day_meals, d)
+        lines.append(f"\n  일일 합계: {daily.total_calories:.0f}kcal | "
+                     f"P:{daily.total_protein_g:.0f}g C:{daily.total_carbs_g:.0f}g F:{daily.total_fat_g:.0f}g")
+
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def daily_nutrition(date_str: str | None = None) -> str:
+    """일일 영양 요약 + 목표 대비 달성률.
+
+    Args:
+        date_str: 날짜 (YYYY-MM-DD, 기본: 오늘)
+    """
+    adapter = get_adapter()
+    d = date_str or date.today().isoformat()
+    d_date = date.fromisoformat(d)
+
+    meals = adapter.get_meals(start_date=d_date, end_date=d_date)
+    if not meals:
+        return f"{d} 식사 기록 없음."
+
+    daily = aggregate_daily_nutrition(meals, d)
+
+    # 영양 목표 조회
+    target = adapter.get_nutrition_target(target_date=d_date)
+
+    # 체중 조회 (목표 대비 분석용)
+    body = adapter.get_body_metrics(limit=1)
+    weight_kg = body[0].weight_kg if body else 88.0  # fallback
+
+    if target:
+        analysis = analyze_vs_target(daily, target, weight_kg)
+        lines = [render_daily_summary(daily, target, weight_kg)]
+        if analysis.get("risks"):
+            lines.append("\n⚠ 리스크:")
+            for r in analysis["risks"]:
+                lines.append(f"  - {r}")
+        return "\n".join(lines)
+    else:
+        return render_daily_summary(daily)
+
+
+@mcp.tool()
+def nutrition_insight(period: str = "7d") -> str:
+    """영양 트렌드 분석.
+
+    Args:
+        period: 분석 기간 (7d/2w/1m)
+    """
+    adapter = get_adapter()
+
+    p = period.strip().lower()
+    if p.endswith("d"):
+        days = int(p[:-1])
+    elif p.endswith("w"):
+        days = int(p[:-1]) * 7
+    elif p.endswith("m"):
+        days = int(p[:-1]) * 30
+    else:
+        days = int(p)
+
+    today = date.today()
+    start = today - timedelta(days=days)
+    meals = adapter.get_meals(start_date=start, end_date=today)
+
+    if not meals:
+        return f"최근 {days}일간 식사 기록 없음."
+
+    target = adapter.get_nutrition_target()
+    body = adapter.get_body_metrics(limit=1)
+    weight_kg = body[0].weight_kg if body else 88.0
+
+    trend = analyze_nutrition_trend(meals, days=days)
+    lines = [f"═══ 영양 트렌드 (최근 {days}일) ═══\n"]
+    lines.append(f"기록 일수: {trend.get('recorded_days', 0)}일")
+    lines.append(f"평균 칼로리: {trend.get('avg_calories', 0):.0f}kcal")
+    lines.append(f"평균 단백질: {trend.get('avg_protein', 0):.0f}g")
+    lines.append(f"평균 탄수화물: {trend.get('avg_carbs', 0):.0f}g")
+    lines.append(f"평균 지방: {trend.get('avg_fat', 0):.0f}g")
+
+    if trend.get("risks"):
+        lines.append("\n⚠ 리스크:")
+        for r in trend["risks"]:
+            lines.append(f"  - {r}")
+
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def set_nutrition_target(
+    phase: str,
+    calories_target: float,
+    protein_g_per_kg: float = 2.0,
+    carbs_g_per_kg: float = 4.0,
+    fat_g_per_kg: float = 1.0,
+    water_ml_target: float = 3000.0,
+) -> str:
+    """영양 목표 설정/변경.
+
+    Args:
+        phase: 목표 페이즈 (bulk/cut/maintain/recomp)
+        calories_target: 일일 칼로리 목표 (kcal)
+        protein_g_per_kg: 단백질 (g/kg 체중)
+        carbs_g_per_kg: 탄수화물 (g/kg 체중)
+        fat_g_per_kg: 지방 (g/kg 체중)
+        water_ml_target: 일일 수분 목표 (ml)
+    """
+    adapter = get_adapter()
+    target = NutritionTarget(
+        phase=phase,
+        calories_target=calories_target,
+        protein_g_per_kg=protein_g_per_kg,
+        carbs_g_per_kg=carbs_g_per_kg,
+        fat_g_per_kg=fat_g_per_kg,
+        water_ml_target=water_ml_target,
+        start_date=date.today().isoformat(),
+    )
+    tid = adapter.save_nutrition_target(target)
+
+    body = adapter.get_body_metrics(limit=1)
+    weight = body[0].weight_kg if body else 88.0
+
+    lines = [f"✓ 영양 목표 설정 ({phase})"]
+    lines.append(f"  칼로리: {calories_target:.0f}kcal/일")
+    lines.append(f"  단백질: {protein_g_per_kg}g/kg = {protein_g_per_kg * weight:.0f}g/일")
+    lines.append(f"  탄수화물: {carbs_g_per_kg}g/kg = {carbs_g_per_kg * weight:.0f}g/일")
+    lines.append(f"  지방: {fat_g_per_kg}g/kg = {fat_g_per_kg * weight:.0f}g/일")
+    lines.append(f"  수분: {water_ml_target:.0f}ml/일")
+
+    return "\n".join(lines)
+
+
+# ─── 회복 코치 도구 ───
+
+
+@mcp.tool()
+def log_sleep(
+    duration_hours: float,
+    date_str: str | None = None,
+    sleep_start: str | None = None,
+    sleep_end: str | None = None,
+    quality: int | None = None,
+    note: str = "",
+) -> str:
+    """수면 기록 + 주간 추세.
+
+    Args:
+        duration_hours: 수면 시간 (소수점 가능, 예: 7.5)
+        date_str: 날짜 (YYYY-MM-DD, 기본: 오늘)
+        sleep_start: 취침 시간 (HH:MM)
+        sleep_end: 기상 시간 (HH:MM)
+        quality: 수면 품질 (1-5, 주관적)
+        note: 메모
+    """
+    adapter = get_adapter()
+    d = date_str or date.today().isoformat()
+
+    log = SleepLog(
+        date=d, duration_hours=duration_hours,
+        sleep_start=sleep_start, sleep_end=sleep_end,
+        quality=quality, note=note,
+    )
+    adapter.save_sleep_log(log)
+
+    lines = [f"✓ 수면 기록 | {d} | {duration_hours}시간"]
+    if sleep_start and sleep_end:
+        lines.append(f"  {sleep_start} → {sleep_end}")
+    if quality:
+        lines.append(f"  품질: {'★' * quality}{'☆' * (5 - quality)} ({quality}/5)")
+
+    # 주간 추세
+    d_date = date.fromisoformat(d)
+    recent = adapter.get_sleep_logs(
+        start_date=d_date - timedelta(days=7),
+        end_date=d_date,
+    )
+    if len(recent) >= 3:
+        trend = analyze_sleep_trend(recent, days=7)
+        lines.append(f"\n  주간 평균: {trend.get('avg_hours', 0)}시간")
+        if trend.get("risks"):
+            for r in trend["risks"]:
+                lines.append(f"  ⚠ {r}")
+
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def recovery_score(date_str: str | None = None) -> str:
+    """회복 점수(0-100) + 피로 경고 + 디로드 권고.
+
+    Args:
+        date_str: 날짜 (YYYY-MM-DD, 기본: 오늘)
+    """
+    adapter = get_adapter()
+    d = date_str or date.today().isoformat()
+    d_date = date.fromisoformat(d)
+
+    # 최근 수면 기록
+    sleep_logs = adapter.get_sleep_logs(
+        start_date=d_date - timedelta(days=7),
+        end_date=d_date,
+    )
+
+    # 최근 세션
+    sessions = adapter.get_sessions(
+        start_date=d_date - timedelta(days=7),
+        end_date=d_date,
+    )
+
+    recovery = calculate_fatigue_score(sleep_logs, sessions, target_date=d)
+    rendered = render_recovery_score(recovery)
+
+    # 회복 준비도
+    readiness = assess_recovery_readiness(recovery)
+    lines = [rendered]
+    lines.append(f"\n### 훈련 준비도")
+    lines.append(f"  권장 강도: {readiness['recommended_intensity']}")
+    lines.append(f"  훈련 가능: {'예' if readiness['can_train'] else '아니오'}")
+
+    if readiness["warnings"]:
+        lines.append("\n  경고:")
+        for w in readiness["warnings"]:
+            lines.append(f"    ⚠ {w}")
+
+    if readiness["suggestions"]:
+        lines.append("\n  제안:")
+        for s in readiness["suggestions"]:
+            lines.append(f"    💡 {s}")
+
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def fatigue_check() -> str:
+    """피로 종합 분석 (수면 + 훈련부하 + 연속훈련일)."""
+    adapter = get_adapter()
+    today = date.today()
+
+    sleep_logs = adapter.get_sleep_logs(
+        start_date=today - timedelta(days=7),
+        end_date=today,
+    )
+    sessions = adapter.get_sessions(
+        start_date=today - timedelta(days=7),
+        end_date=today,
+    )
+
+    recovery = calculate_fatigue_score(sleep_logs, sessions)
+    readiness = assess_recovery_readiness(recovery)
+
+    lines = [f"═══ 피로 종합 분석 ({today.isoformat()}) ═══\n"]
+
+    # Recovery score
+    lines.append(f"회복 점수: {recovery.score}/100 ({recovery.fatigue_level})")
+    lines.append(f"연속 훈련일: {recovery.consecutive_training_days}일")
+
+    # Sleep trend
+    if sleep_logs:
+        trend = analyze_sleep_trend(sleep_logs, days=7)
+        lines.append(f"\n수면 (최근 {trend.get('period_days', 0)}일):")
+        lines.append(f"  평균: {trend.get('avg_hours', 0)}시간")
+        lines.append(f"  범위: {trend.get('min_hours', 0)} ~ {trend.get('max_hours', 0)}시간")
+        if trend.get("risks"):
+            for r in trend["risks"]:
+                lines.append(f"  ⚠ {r}")
+    else:
+        lines.append("\n수면 데이터 없음")
+
+    # Training load
+    workout_count = sum(1 for s in sessions if s.session_type == SessionType.WORKOUT)
+    total_vol = sum(s.total_volume for s in sessions)
+    lines.append(f"\n훈련 (최근 7일):")
+    lines.append(f"  세션: {workout_count}회")
+    lines.append(f"  총 볼륨: {total_vol:,.0f}kg")
+
+    # Fatigue detail
+    d = recovery.details
+    if d:
+        lines.append(f"\n피로 구성 (합계 {d.get('total_fatigue', 0)}/100):")
+        lines.append(f"  수면부채: {d.get('sleep_debt_score', 0)}/30")
+        lines.append(f"  훈련부하: {d.get('training_load_score', 0)}/30")
+        lines.append(f"  연속훈련: {d.get('consecutive_days_score', 0)}/20")
+        lines.append(f"  주관피로: {d.get('subjective_score', 0)}/10")
+        lines.append(f"  회복위반: {d.get('violation_score', 0)}/10")
+
+    # Recommendation
+    lines.append(f"\n권장: {readiness['recommended_intensity']}")
+    if readiness["warnings"]:
+        for w in readiness["warnings"]:
+            lines.append(f"⚠ {w}")
 
     return "\n".join(lines)
 
