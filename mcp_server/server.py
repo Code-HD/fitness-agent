@@ -779,7 +779,7 @@ def daily_nutrition(date_str: str | None = None) -> str:
 
     if target:
         analysis = analyze_vs_target(daily, target, weight_kg)
-        lines = [render_daily_summary(daily, target, weight_kg)]
+        lines = [render_daily_summary(daily, analysis)]
         if analysis.get("risks"):
             lines.append("\n⚠ 리스크:")
             for r in analysis["risks"]:
@@ -819,18 +819,37 @@ def nutrition_insight(period: str = "7d") -> str:
     body = adapter.get_body_metrics(limit=1)
     weight_kg = body[0].weight_kg if body else 88.0
 
-    trend = analyze_nutrition_trend(meals, days=days)
-    lines = [f"═══ 영양 트렌드 (최근 {days}일) ═══\n"]
-    lines.append(f"기록 일수: {trend.get('recorded_days', 0)}일")
-    lines.append(f"평균 칼로리: {trend.get('avg_calories', 0):.0f}kcal")
-    lines.append(f"평균 단백질: {trend.get('avg_protein', 0):.0f}g")
-    lines.append(f"평균 탄수화물: {trend.get('avg_carbs', 0):.0f}g")
-    lines.append(f"평균 지방: {trend.get('avg_fat', 0):.0f}g")
+    # 일별 집계
+    from collections import defaultdict
+    by_date: dict[str, list] = defaultdict(list)
+    for m in meals:
+        by_date[m.date].append(m)
 
-    if trend.get("risks"):
-        lines.append("\n⚠ 리스크:")
-        for r in trend["risks"]:
-            lines.append(f"  - {r}")
+    daily_summaries = []
+    for d_str in sorted(by_date.keys()):
+        daily_summaries.append(aggregate_daily_nutrition(by_date[d_str], d_str))
+
+    trend = analyze_nutrition_trend(daily_summaries, target, weight_kg)
+    lines = [f"═══ 영양 트렌드 (최근 {days}일) ═══\n"]
+    lines.append(f"기록 일수: {len(daily_summaries)}일")
+
+    if trend.get("status") == "insufficient_data":
+        lines.append(f"\n{trend.get('message', '데이터 부족')}")
+        # 현재까지의 합계라도 표시
+        if daily_summaries:
+            avg_cal = sum(d.total_calories for d in daily_summaries) / len(daily_summaries)
+            avg_pro = sum(d.total_protein_g for d in daily_summaries) / len(daily_summaries)
+            lines.append(f"\n현재 평균: {avg_cal:.0f}kcal | P:{avg_pro:.0f}g")
+    else:
+        lines.append(f"평균 칼로리: {trend.get('avg_calories', 0):.0f}kcal")
+        lines.append(f"평균 단백질: {trend.get('avg_protein', 0):.0f}g")
+        lines.append(f"평균 탄수화물: {trend.get('avg_carbs', 0):.0f}g")
+        lines.append(f"평균 지방: {trend.get('avg_fat', 0):.0f}g")
+
+        if trend.get("risks"):
+            lines.append("\n⚠ 리스크:")
+            for r in trend["risks"]:
+                lines.append(f"  - {r}")
 
     return "\n".join(lines)
 
@@ -1006,12 +1025,15 @@ def fatigue_check() -> str:
     # Sleep trend
     if sleep_logs:
         trend = analyze_sleep_trend(sleep_logs, days=7)
-        lines.append(f"\n수면 (최근 {trend.get('period_days', 0)}일):")
-        lines.append(f"  평균: {trend.get('avg_hours', 0)}시간")
-        lines.append(f"  범위: {trend.get('min_hours', 0)} ~ {trend.get('max_hours', 0)}시간")
-        if trend.get("risks"):
-            for r in trend["risks"]:
-                lines.append(f"  ⚠ {r}")
+        if trend.get("status") == "insufficient_data":
+            lines.append(f"\n수면: 기록 {len(sleep_logs)}일 — {trend.get('message', '데이터 부족')}")
+        else:
+            lines.append(f"\n수면 (최근 {trend.get('period_days', 0)}일):")
+            lines.append(f"  평균: {trend.get('avg_hours', 0)}시간")
+            lines.append(f"  범위: {trend.get('min_hours', 0)} ~ {trend.get('max_hours', 0)}시간")
+            if trend.get("risks"):
+                for r in trend["risks"]:
+                    lines.append(f"  ⚠ {r}")
     else:
         lines.append("\n수면 데이터 없음")
 
